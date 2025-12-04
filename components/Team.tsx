@@ -23,20 +23,20 @@ const Team: React.FC<TeamProps> = ({ lang }) => {
         },
         {
             name: 'Runa Gold',
-            role: lang === 'es' ? 'Diseñadora de Productos & AI' : 'Product Designer & AI',
+            role: lang === 'es' ? 'Branding e Investigación IA' : 'Branding & AI Research',
             location: 'Venezuela',
             image: '/team-runa.png'
         },
         {
             name: 'MouQ',
-            role: lang === 'es' ? 'Diseñador de Productos & Consultor IT' : 'Product Designer & IT Consultant',
+            role: lang === 'es' ? 'Consultor IT con Visión Holística' : 'IT Consultant with Holistic Vision',
             location: 'Venezuela',
             image: '/team-mouq.png'
         }
     ];
 
     return (
-        <div className="w-full py-24 px-6">
+        <div className="w-full py-32 px-6">
             <div className="max-w-4xl mx-auto">
 
                 {/* Header */}

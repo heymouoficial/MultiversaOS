@@ -77,30 +77,54 @@ export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en'
   if (!ai) {
     return {
       recommendation: "SmartWeb",
-      reasoning: lang === 'es' ? "Modo Demo (Sin API Key). Recomendación por defecto." : "Demo Mode (No API Key). Default recommendation.",
-      features: ["AI Chatbot", "Dynamic CMS", "Analytics"],
+      reasoning: lang === 'es' ? "Modo Demo. Recomendación por defecto." : "Demo Mode. Default recommendation.",
+      features: lang === 'es' ? ["Chatbot IA", "CMS Dinámico", "Analíticas"] : ["AI Chatbot", "Dynamic CMS", "Analytics"],
       time: "36h"
     };
   }
 
+  const featureExamples = lang === 'es'
+    ? {
+      nano: ["Landing profesional", "Formulario de contacto", "Gemini Core integrado", "Reportes automáticos"],
+      smart: ["Catálogo de productos", "Chatbot conversacional", "WhatsApp Business", "Automatización de ventas", "Panel de administración"],
+      custom: ["Backend personalizado", "Integraciones API", "Flujos n8n", "Arquitectura escalable"]
+    }
+    : {
+      nano: ["Professional landing", "Contact form", "Integrated Gemini Core", "Automatic reports"],
+      smart: ["Product catalog", "Conversational chatbot", "WhatsApp Business", "Sales automation", "Admin panel"],
+      custom: ["Custom backend", "API integrations", "n8n workflows", "Scalable architecture"]
+    };
+
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-2.0-flash',
-      contents: `You are an AI Software Architect. Analyze the user's project idea and generate a "Digital Blueprint".
+      contents: `Eres un Arquitecto de Software Senior. Analiza la idea del usuario y genera un "Blueprint Digital" personalizado.
       
-      User Input: "${description}"
-      User Name: "${userName || 'Client'}"
-      Target Output Language: ${lang === 'es' ? 'SPANISH' : 'ENGLISH'} (CRITICAL: Output MUST be in this language regardless of input).
+      ENTRADA DEL USUARIO: "${description}"
+      NOMBRE DEL CLIENTE: "${userName || 'Cliente'}"
+      IDIOMA DE SALIDA: ${lang === 'es' ? 'ESPAÑOL (todo en español, sin palabras en inglés)' : 'ENGLISH (all in English, no Spanish words)'}
       
-      Logic:
-      - Simple/One-Page/Portfolio/LinkTree -> NanoWeb ($200, 6h)
-      - Business/Catalog/Services/Auth/Chatbot -> SmartWeb ($400, 36h)
-      - Complex/SaaS/Custom/Large Scale -> Custom Web (Consulting)
+      LÓGICA DE RECOMENDACIÓN:
+      - NanoWeb ($200, 6h): Proyectos simples, OnePage, Portfolio, LinkTree, presencia básica
+      - SmartWeb ($400, 36h): Negocios con catálogo, servicios, autenticación, chatbot, automatización
+      - Custom Web (Cotización): Proyectos complejos, SaaS, múltiples integraciones, escala enterprise
+      
+      REGLAS:
+      1. El "reasoning" debe ser una explicación personalizada dirigida a "${userName || 'el cliente'}" basada en SU proyecto específico ("${description}")
+      2. NO menciones "Multiversa" en el reasoning - enfócate en las necesidades del usuario
+      3. Los features deben ser específicos para el proyecto del usuario
+      4. Máximo 25 palabras en reasoning
+      5. CRÍTICO: TODO debe estar en ${lang === 'es' ? 'español' : 'inglés'}, sin mezclar idiomas
+      
+      EJEMPLOS DE FEATURES POR PLAN:
+      - NanoWeb: ${JSON.stringify(featureExamples.nano)}
+      - SmartWeb: ${JSON.stringify(featureExamples.smart)}
+      - Custom: ${JSON.stringify(featureExamples.custom)}
 
-      Output JSON format: 
+      Responde SOLO con este JSON (sin markdown):
       { 
         "recommendation": "NanoWeb" | "SmartWeb" | "Custom Web", 
-        "reasoning": "Short professional explanation addressed to ${userName || 'the client'} (max 20 words).",
+        "reasoning": "Explicación corta y personalizada para el usuario",
         "features": ["Feature 1", "Feature 2", "Feature 3"],
         "time": "6h" | "36h" | "TBD"
       }`,
@@ -115,8 +139,10 @@ export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en'
   } catch (error) {
     return {
       recommendation: "SmartWeb",
-      reasoning: lang === 'es' ? "Escalabilidad detectada. Arquitectura robusta requerida." : "Scalability detected. Robust architecture required.",
-      features: ["AI Chatbot", "Dynamic CMS", "Analytics"],
+      reasoning: lang === 'es'
+        ? `${userName || 'Tu proyecto'} requiere una arquitectura robusta para escalar.`
+        : `${userName || 'Your project'} requires robust architecture to scale.`,
+      features: lang === 'es' ? ["Chatbot IA", "CMS Dinámico", "Analíticas"] : ["AI Chatbot", "Dynamic CMS", "Analytics"],
       time: "36h"
     };
   }
