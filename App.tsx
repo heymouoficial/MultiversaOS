@@ -128,13 +128,14 @@ const App: React.FC = () => {
   }
 
   // Enhanced Liquid Glass Nav Button
-  const NavButton = ({ targetId, label }: { targetId: string, label: string }) => {
+  const NavButton = ({ targetId, label, labelEs }: { targetId: string, label: string, labelEs: string }) => {
     const isActive = activeSection === targetId;
+    const displayLabel = lang === 'es' ? labelEs : label;
 
     return (
       <button
         onClick={() => scrollToSection(targetId)}
-        className="relative group px-5 py-2 rounded-full overflow-hidden transition-all duration-500 ease-out"
+        className="relative group px-4 py-2 rounded-full overflow-hidden transition-all duration-500 ease-out"
       >
         {/* Glass Background & Border */}
         <div className={`absolute inset-0 rounded-full border transition-all duration-500
@@ -150,11 +151,11 @@ const App: React.FC = () => {
         {/* Text Content */}
         <span className={`relative z-10 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-300
             ${isActive
-            ? 'text-lime-700 dark:text-lime-neon'
-            : 'text-zinc-600 dark:text-zinc-400 group-hover:text-lime-600 dark:group-hover:text-lime-100'
+            ? 'text-lime-600 dark:text-lime-neon font-medium'
+            : 'text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white'
           }`}
         >
-          {label}
+          {displayLabel}
         </span>
       </button>
     );
@@ -212,20 +213,28 @@ const App: React.FC = () => {
 
           <div className="h-6 w-[1px] bg-black/10 dark:bg-white/10 hidden md:block"></div>
 
-          <nav className="hidden md:flex gap-2">
-            <NavButton targetId="home" label="Home" />
-            <NavButton targetId="stack" label="Core" />
-            <NavButton targetId="pricing" label="Access" />
+          <nav className="hidden md:flex gap-1">
+            <NavButton targetId="home" label="Home" labelEs="Inicio" />
+            <NavButton targetId="stack" label="Core" labelEs="Core" />
+            <NavButton targetId="pricing" label="Access" labelEs="Acceso" />
+            <NavButton targetId="workflow" label="Process" labelEs="Proceso" />
+            <NavButton targetId="team" label="Team" labelEs="Equipo" />
           </nav>
         </header>
 
-        {/* Controls (Lang + Theme) */}
+        {/* Language Switcher with Flags */}
         <div className="flex gap-2">
           <button
             onClick={toggleLang}
-            className="header-dock h-14 rounded-2xl px-4 text-[10px] font-mono font-bold text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-lime-500 dark:hover:border-lime-neon/50 transition-all uppercase flex items-center gap-2 group"
+            className="header-dock h-14 rounded-2xl px-4 text-[11px] font-mono font-medium text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-lime-500 dark:hover:border-lime-neon/50 transition-all flex items-center gap-2.5 group"
           >
-            <span className="text-lime-600 dark:text-lime-neon group-hover:shadow-[0_0_10px_currentColor] transition-shadow">LAN</span> {lang}
+            {/* Flag */}
+            {lang === 'es' ? (
+              <span className="text-base" title="Venezuela">🇻🇪</span>
+            ) : (
+              <span className="text-base" title="USA">🇺🇸</span>
+            )}
+            <span className="uppercase tracking-wider">{lang === 'es' ? 'ESP' : 'ENG'}</span>
           </button>
 
           <button
