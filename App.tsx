@@ -248,14 +248,14 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* --- RIGHT DOCK (STATUS BADGE) --- */}
-      <div className="fixed top-6 right-4 md:right-8 z-50 animate-reveal" style={{ animationDelay: '0.4s' }}>
-        <div className="h-14 rounded-2xl px-5 flex items-center gap-3 border border-lime-neon bg-lime-neon shadow-[0_0_20px_rgba(212,255,112,0.4)]">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-30"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
+      {/* --- RIGHT DOCK (STATUS BADGE - Compact) --- */}
+      <div className="fixed top-6 right-4 md:right-8 z-50">
+        <div className="h-10 rounded-full px-3 flex items-center gap-2 border border-lime-neon/60 bg-lime-neon/90 shadow-[0_0_15px_rgba(212,255,112,0.3)] backdrop-blur-sm">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-40"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-black"></span>
           </span>
-          <span className="text-[10px] md:text-[11px] font-mono text-black tracking-[0.15em] uppercase font-bold leading-none">
+          <span className="text-[9px] font-mono text-black tracking-[0.12em] uppercase font-bold leading-none">
             {text.hero.spots}
           </span>
         </div>
