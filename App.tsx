@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import Hero from './components/Hero';
 import Pricing from './components/Pricing';
@@ -84,43 +83,17 @@ const App: React.FC = () => {
 
   const scrollToSection = (id: string) => {
       const el = document.getElementById(id);
-      if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Enhanced Liquid Glass Nav Button
-  const NavButton = ({ targetId, label }: { targetId: string, label: string }) => {
-    const isActive = activeSection === targetId;
-    
-    return (
-      <button 
-        onClick={() => scrollToSection(targetId)}
-        className="relative group px-5 py-2 rounded-full overflow-hidden transition-all duration-500 ease-out"
-      >
-        {/* Glass Background & Border */}
-        <div className={`absolute inset-0 rounded-full border transition-all duration-500 
-            ${isActive 
-                ? 'bg-lime-500/10 dark:bg-lime-neon/10 border-lime-500/50 dark:border-lime-neon/50 shadow-[0_0_15px_rgba(212,255,112,0.15)]' 
-                : 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/10 group-hover:border-lime-500/30 dark:group-hover:border-lime-neon/30'
-            }`}
-        ></div>
-
-        {/* Hover Glow Effect */}
-        <div className="absolute inset-0 bg-lime-400/20 dark:bg-lime-neon/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-        {/* Text Content */}
-        <span className={`relative z-10 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-300
-            ${isActive 
-                ? 'text-lime-700 dark:text-lime-neon' 
-                : 'text-zinc-600 dark:text-zinc-400 group-hover:text-lime-600 dark:group-hover:text-lime-100'
-            }`}
-        >
-          {label}
-        </span>
-      </button>
-    );
-  };
+  const NavButton = ({ href, label }: { href: string, label: string }) => (
+    <a 
+      href={href} 
+      className="px-4 py-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/5 text-[10px] font-bold tracking-widest uppercase text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-lime-neon transition-all hover:scale-105 active:scale-95"
+    >
+      {label}
+    </a>
+  );
 
   return (
     <div className={`relative w-full h-screen overflow-hidden ${isDark ? 'bg-black text-zinc-100' : 'bg-zinc-100 text-zinc-900'} transition-colors duration-500 selection:bg-lime-neon/30`}>
@@ -188,25 +161,25 @@ const App: React.FC = () => {
       </div>
 
       {/* --- LEFT DOCK (HEADER) --- */}
-      <div className="fixed top-6 left-4 md:left-8 z-50 animate-reveal flex items-center gap-4" style={{animationDelay: '0.2s'}}>
+      <div className="fixed top-6 left-4 md:left-8 z-50 animate-reveal flex flex-col items-start gap-4" style={{animationDelay: '0.2s'}}>
         
         {/* Main Dock */}
-        <header className="header-dock h-14 rounded-2xl px-4 flex gap-4 items-center shadow-2xl transition-colors duration-500">
+        <header className="header-dock rounded-2xl px-3 py-3 flex gap-4 items-center shadow-2xl transition-colors duration-500">
             {/* Logo */}
-            <div className="flex items-center gap-3 select-none cursor-pointer" onClick={() => scrollToSection('home')}>
+            <div className="flex items-center gap-3 select-none pl-2 pr-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-lime-600 dark:bg-lime-neon shadow-[0_0_12px_rgba(77,124,15,0.5)] dark:shadow-[0_0_12px_#D4FF70] animate-pulse"></div>
                 <div className="flex flex-col leading-none">
                     <span className="text-sm font-bold tracking-[0.2em] text-zinc-900 dark:text-white">MULTIVERSA</span>
-                    <span className="text-[8px] font-mono text-zinc-500 dark:text-lime-neon/80 tracking-widest text-right">OS v0.9.5</span>
+                    <span className="text-[8px] font-mono text-zinc-500 dark:text-lime-neon/80 tracking-widest text-right">OS v0.9.3</span>
                 </div>
             </div>
 
             <div className="h-6 w-[1px] bg-black/10 dark:bg-white/10 hidden md:block"></div>
 
             <nav className="hidden md:flex gap-2">
-                <NavButton targetId="home" label="Home" />
-                <NavButton targetId="stack" label="Core" />
-                <NavButton targetId="pricing" label="Access" />
+                <NavButton href="#home" label="Home" />
+                <NavButton href="#stack" label="Core" />
+                <NavButton href="#pricing" label="Access" />
             </nav>
         </header>
 
@@ -214,19 +187,19 @@ const App: React.FC = () => {
         <div className="flex gap-2">
            <button 
               onClick={toggleLang} 
-              className="header-dock h-14 rounded-2xl px-4 text-[10px] font-mono font-bold text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-lime-500 dark:hover:border-lime-neon/50 transition-all uppercase flex items-center gap-2 group"
+              className="header-dock rounded-full px-4 py-2 text-[10px] font-mono font-bold text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-lime-500 dark:hover:border-lime-neon/50 transition-all uppercase flex items-center gap-2"
            >
-              <span className="text-lime-600 dark:text-lime-neon group-hover:shadow-[0_0_10px_currentColor] transition-shadow">LAN</span> {lang}
+              <span className="text-lime-600 dark:text-lime-neon">LAN</span> {lang}
            </button>
 
            <button 
               onClick={toggleTheme}
-              className="header-dock w-14 h-14 rounded-2xl flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-yellow-600 dark:hover:text-yellow-300 border border-black/5 dark:border-white/10 hover:border-yellow-500 dark:hover:border-yellow-300/50 transition-all group"
+              className="header-dock w-9 h-9 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-yellow-600 dark:hover:text-yellow-300 border border-black/5 dark:border-white/10 hover:border-yellow-500 dark:hover:border-yellow-300/50 transition-all"
            >
               {isDark ? (
-                  <svg className="w-5 h-5 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
               ) : (
-                  <svg className="w-5 h-5 group-hover:-rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
               )}
            </button>
         </div>
@@ -234,7 +207,7 @@ const App: React.FC = () => {
 
       {/* --- RIGHT DOCK (STATUS BADGE) --- */}
       <div className="fixed top-6 right-4 md:right-8 z-50 animate-reveal" style={{animationDelay: '0.4s'}}>
-         <div className="h-14 rounded-2xl px-5 flex items-center gap-3 border border-lime-neon bg-lime-neon shadow-[0_0_20px_rgba(212,255,112,0.4)]">
+         <div className="rounded-full px-5 py-2.5 flex items-center gap-3 border border-lime-neon bg-lime-neon shadow-[0_0_20px_rgba(212,255,112,0.4)]">
              <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-30"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>

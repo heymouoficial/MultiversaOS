@@ -69,13 +69,7 @@ export const t = {
       q3: "¿Mis datos están seguros?",
       a3: "Seguridad Enterprise con Supabase y Vercel.",
       q4: "¿Puedo escalar después?",
-      a4: "Sí. Escalar es un simple upgrade de software.",
-      q5: "¿Qué tecnología usan?",
-      a5: "Next.js 14, Supabase (PostgreSQL) y Gemini Pro.",
-      q6: "¿Se conecta con mi CRM?",
-      a6: "Sí, SmartWeb incluye integración con CRMs vía API.",
-      q7: "¿Ofrecen soporte continuo?",
-      a7: "Incluimos 30 días de garantía y soporte prioritario."
+      a4: "Sí. Escalar es un simple upgrade de software."
     },
     cta: {
       title: "¿Listo? Reserva Tu",
@@ -166,13 +160,7 @@ export const t = {
       q3: "Are my data safe?",
       a3: "Enterprise security with Supabase and Vercel.",
       q4: "Can I scale later?",
-      a4: "Yes. Scaling is a simple software upgrade.",
-      q5: "What technology do you use?",
-      a5: "Next.js 14, Supabase (PostgreSQL) and Gemini Pro.",
-      q6: "Does it connect with my CRM?",
-      a6: "Yes, SmartWeb includes CRM integration via API.",
-      q7: "Do you offer ongoing support?",
-      a7: "We include 30 days of warranty and priority support."
+      a4: "Yes. Scaling is a simple software upgrade."
     },
     cta: {
       title: "Ready? Reserve Your",
