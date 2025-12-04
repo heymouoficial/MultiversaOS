@@ -248,14 +248,14 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* --- RIGHT DOCK (STATUS BADGE - Compact) --- */}
-      <div className="fixed top-6 right-4 md:right-8 z-50">
-        <div className="h-10 rounded-full px-3 flex items-center gap-2 border border-lime-neon/60 bg-lime-neon/90 shadow-[0_0_15px_rgba(212,255,112,0.3)] backdrop-blur-sm">
+      {/* --- STATUS BADGE (Bottom-left on mobile, top-right on desktop) --- */}
+      <div className="fixed bottom-24 left-4 md:bottom-auto md:top-6 md:left-auto md:right-8 z-50">
+        <div className="h-8 md:h-10 rounded-full px-2.5 md:px-3 flex items-center gap-1.5 md:gap-2 border border-lime-neon/60 bg-lime-neon/90 shadow-[0_0_15px_rgba(212,255,112,0.3)] backdrop-blur-sm">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-40"></span>
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-black"></span>
           </span>
-          <span className="text-[9px] font-mono text-black tracking-[0.12em] uppercase font-bold leading-none">
+          <span className="text-[8px] md:text-[9px] font-mono text-black tracking-[0.1em] uppercase font-bold leading-none">
             {text.hero.spots}
           </span>
         </div>
