@@ -27,7 +27,7 @@ export const sendMessageToGemini = async (history: ChatMessage[], message: strin
     const fullHistory = [...contextMemory, ...history].slice(-15);
 
     const chat = ai.chats.create({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.0-flash',
       config: {
         systemInstruction: `Eres Auréon, Consultor Senior de IA en Multiversa Agency.
         
@@ -85,7 +85,7 @@ export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en'
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.0-flash',
       contents: `You are an AI Software Architect. Analyze the user's project idea and generate a "Digital Blueprint".
       
       User Input: "${description}"
