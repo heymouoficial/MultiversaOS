@@ -20,21 +20,21 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
     useEffect(() => {
         if (!containerRef.current) return;
 
-        const SEPARATION = 150;
-        const AMOUNTX = 40;
-        const AMOUNTY = 60;
+        const SEPARATION = 100;
+        const AMOUNTX = 50;
+        const AMOUNTY = 50;
 
         // Scene setup
         const scene = new THREE.Scene();
         // scene.fog = new THREE.Fog(0xffffff, 2000, 10000);
 
         const camera = new THREE.PerspectiveCamera(
-            60,
+            75,
             window.innerWidth / window.innerHeight,
             1,
             10000,
         );
-        camera.position.set(0, 355, 1220);
+        camera.position.set(0, 400, 1000); // Closer and higher angle
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
@@ -62,9 +62,9 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
 
                 positions.push(x, y, z);
                 if (theme === 'dark') {
-                    colors.push(0.2, 0.2, 0.2); // Darker dots for dark mode
+                    colors.push(0.3, 0.3, 0.35); // Slightly brighter/bluer in dark mode
                 } else {
-                    colors.push(0, 0, 0);
+                    colors.push(0.1, 0.1, 0.1);
                 }
             }
         }
@@ -77,10 +77,10 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
 
         // Create material
         const material = new THREE.PointsMaterial({
-            size: 8,
+            size: theme === 'dark' ? 6 : 8, // Smaller dots for elegance
             vertexColors: true,
             transparent: true,
-            opacity: theme === 'dark' ? 0.4 : 0.8,
+            opacity: theme === 'dark' ? 0.6 : 0.4,
             sizeAttenuation: true,
         });
 
@@ -103,10 +103,12 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
                 for (let iy = 0; iy < AMOUNTY; iy++) {
                     const index = i * 3;
 
-                    // Animate Y position with sine waves
+                    // Animate Y position with sine waves - AGGRESSIVE MOVEMENT
+                    // Using a larger multiplier for 'count' speeds it up
+                    // Using a larger multiplier for the result increases amplitude
                     positions[index + 1] =
-                        Math.sin((ix + count) * 0.3) * 50 +
-                        Math.sin((iy + count) * 0.5) * 50;
+                        (Math.sin((ix + count) * 0.5) * 50) +
+                        (Math.sin((iy + count) * 0.5) * 50);
 
                     i++;
                 }
@@ -114,9 +116,14 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
 
             positionAttribute.needsUpdate = true;
 
+            // Continuous rotation
+            scene.rotation.y += 0.002;
+
             renderer.render(scene, camera);
-            count += 0.1;
+            count += 0.1; // Faster speed
         };
+
+        animate(); // Start animation loop
 
         // Handle window resize
         const handleResize = () => {

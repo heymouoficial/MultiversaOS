@@ -18,8 +18,8 @@ const App: React.FC = () => {
 
   // Identity State
   const [userName, setUserName] = useState<string>('');
-  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-  const [tempName, setTempName] = useState('');
+  // const [showWelcomeModal, setShowWelcomeModal] = useState(false); // REMOVED
+  // const [tempName, setTempName] = useState(''); // REMOVED
 
   // Refs for sections to track scrolling
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
@@ -28,10 +28,11 @@ const App: React.FC = () => {
     const storedName = localStorage.getItem('multiversa_user');
     if (storedName) {
       setUserName(storedName);
-    } else {
-      const timer = setTimeout(() => setShowWelcomeModal(true), 500);
-      return () => clearTimeout(timer);
     }
+    // else {
+    //     const timer = setTimeout(() => setShowWelcomeModal(true), 500);
+    //     return () => clearTimeout(timer);
+    // }
 
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -61,14 +62,14 @@ const App: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleNameSubmit = () => {
-    if (tempName.trim()) {
-      const name = tempName.trim();
-      setUserName(name);
-      localStorage.setItem('multiversa_user', name);
-      setShowWelcomeModal(false);
-    }
-  };
+  // const handleNameSubmit = () => {
+  //     if (tempName.trim()) {
+  //         const name = tempName.trim();
+  //         setUserName(name);
+  //         localStorage.setItem('multiversa_user', name);
+  //         setShowWelcomeModal(false);
+  //     }
+  // };
 
   const toggleLang = () => setLang(prev => prev === 'es' ? 'en' : 'es');
   const toggleTheme = () => setIsDark(!isDark);
@@ -100,7 +101,7 @@ const App: React.FC = () => {
         className="relative group px-5 py-2 rounded-full overflow-hidden transition-all duration-500 ease-out"
       >
         {/* Glass Background & Border */}
-        <div className={`absolute inset-0 rounded-full border transition-all duration-500 
+        <div className={`absolute inset-0 rounded-full border transition-all duration-500
             ${isActive
             ? 'bg-lime-500/10 dark:bg-lime-neon/10 border-lime-500/50 dark:border-lime-neon/50 shadow-[0_0_15px_rgba(212,255,112,0.15)]'
             : 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/10 group-hover:border-lime-500/30 dark:group-hover:border-lime-neon/30'
@@ -126,37 +127,7 @@ const App: React.FC = () => {
   return (
     <div className={`relative w-full h-screen overflow-hidden ${isDark ? 'bg-black text-zinc-100' : 'bg-zinc-100 text-zinc-900'} transition-colors duration-500 selection:bg-lime-neon/30`}>
 
-      {/* --- WELCOME MODAL --- */}
-      {showWelcomeModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-md animate-reveal"></div>
-          <div className="relative w-full max-w-md bg-[#0A0A0C] border border-lime-neon/20 rounded-2xl p-8 shadow-[0_0_50px_rgba(212,255,112,0.1)] animate-scale-up flex flex-col items-center text-center">
-            <div className="w-12 h-12 rounded-full bg-lime-neon flex items-center justify-center shadow-lg shadow-lime-neon/20 mb-6 animate-pulse">
-              <span className="text-black font-bold font-serif text-2xl">M</span>
-            </div>
-            <h2 className="text-xl text-white font-medium mb-2 tracking-wide">{text.modal.title}</h2>
-            <p className="text-zinc-400 text-sm mb-8 font-light">{text.modal.label}</p>
-
-            <input
-              type="text"
-              value={tempName}
-              onChange={(e) => setTempName(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleNameSubmit()}
-              placeholder={text.modal.placeholder}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center text-white placeholder-zinc-600 focus:border-lime-neon/50 focus:outline-none transition-colors mb-6 font-mono"
-              autoFocus
-            />
-
-            <button
-              onClick={handleNameSubmit}
-              disabled={!tempName.trim()}
-              className="w-full py-3 bg-lime-neon text-black font-bold uppercase tracking-widest rounded-xl hover:bg-lime-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {text.modal.button}
-            </button>
-          </div>
-        </div>
-      )}
+      {/* --- WELCOME MODAL REMOVED --- */}
 
       {/* --- NAVIGATION RAIL (USER JOURNEY) --- */}
       <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-4 items-center">
@@ -281,6 +252,7 @@ const App: React.FC = () => {
         externalState={chatTrigger}
         onClose={toggleChat}
         userName={userName}
+        setUserName={setUserName}
       />
 
     </div>

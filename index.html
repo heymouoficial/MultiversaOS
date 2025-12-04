@@ -1,259 +1,362 @@
-
 <!DOCTYPE html>
 <html lang="es" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MULTIVERSA OS | v0.9</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              zinc: {
-                950: '#09090B',
-                900: '#101012', 
-                800: '#27272A',
-                400: '#A1A1AA',
-              },
-              black: {
-                DEFAULT: '#020104', 
-                void: '#000000'
-              },
-              lime: {
-                neon: '#D4FF70',
-                glow: '#BEF264',
-                dim: '#4D7C0F',
-              },
-              cyan: {
-                glow: '#22D3EE',
-              }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiversa OS | Tu Web Inteligente</title>
+  <meta name="description"
+    content="Multiversa OS: Despliega tu presencia digital en el Multiverso. Web inteligente potenciada por Gemini 2.0 y Vercel Edge.">
+  <meta name="keywords"
+    content="Multiversa, Web Inteligente, AI, Gemini, Vercel, Landing Page, Automatización, Consultoría Digital">
+  <meta name="author" content="Multiversa Group">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://multiversa.agency/">
+  <meta property="og:title" content="Multiversa OS | Tu Web Inteligente">
+  <meta property="og:description"
+    content="Despliega tu presencia digital en el Multiverso. Web inteligente potenciada por Gemini 2.0.">
+  <meta property="og:image" content="https://multiversa.agency/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://multiversa.agency/">
+  <meta property="twitter:title" content="Multiversa OS | Tu Web Inteligente">
+  <meta property="twitter:description"
+    content="Despliega tu presencia digital en el Multiverso. Web inteligente potenciada por Gemini 2.0.">
+  <meta property="twitter:image" content="https://multiversa.agency/og-image.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            zinc: {
+              950: '#09090B',
+              900: '#101012',
+              800: '#27272A',
+              400: '#A1A1AA',
             },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
+            black: {
+              DEFAULT: '#020104',
+              void: '#000000'
             },
-            animation: {
-              'float': 'float 8s ease-in-out infinite',
-              'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'reveal': 'reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-              'border-spin': 'border-spin 4s linear infinite',
-              'flow-line': 'flowLine 3s linear infinite',
+            lime: {
+              neon: '#D4FF70',
+              glow: '#BEF264',
+              dim: '#4D7C0F',
             },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
-              },
-              reveal: {
-                '0%': { opacity: 0, transform: 'translateY(30px) scale(0.95)' },
-                '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
-              },
-              'border-spin': {
-                '100%': { transform: 'rotate(-360deg)' },
-              },
-              flowLine: {
-                '0%': { strokeDashoffset: '24' },
-                '100%': { strokeDashoffset: '0' },
-              }
+            cyan: {
+              glow: '#22D3EE',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          animation: {
+            'float': 'float 8s ease-in-out infinite',
+            'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'reveal': 'reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+            'border-spin': 'border-spin 4s linear infinite',
+            'flow-line': 'flowLine 3s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            reveal: {
+              '0%': { opacity: 0, transform: 'translateY(30px) scale(0.95)' },
+              '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
+            },
+            'border-spin': {
+              '100%': { transform: 'rotate(-360deg)' },
+            },
+            flowLine: {
+              '0%': { strokeDashoffset: '24' },
+              '100%': { strokeDashoffset: '0' },
             }
           }
         }
       }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #020104; /* Prevents white flash on load */
-        color: #EDEDED;
-        overflow: hidden; /* Main scroll handles overflow */
-      }
-      
-      .snap-container {
-        height: 100vh;
-        width: 100vw;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        /* UPDATED: Proximity prevents getting "stuck" on large sections */
-        scroll-snap-type: y proximity; 
-        scroll-behavior: smooth;
-        perspective: 1px; /* Performance enhancement */
-      }
-      
-      .snap-section {
-        scroll-snap-align: start;
-        min-height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: relative;
-        /* Padding ensures content isn't hidden behind fixed headers on mobile */
-        padding-top: 80px; 
-        padding-bottom: 40px;
-      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-      /* --- SMART GRADIENT (ADAPTIVE CONTRAST) --- */
-      /* Light Mode: Dark Gradient for readability */
-      .text-grad-multiversa {
-        background: linear-gradient(90deg, #000000 0%, #4D7C0F 50%, #0891B2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 600; 
-      }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020104;
+      /* Prevents white flash on load */
+      color: #EDEDED;
+      overflow: hidden;
+      /* Main scroll handles overflow */
+    }
 
-      /* Dark Mode: Light Gradient for glow */
-      html.dark .text-grad-multiversa {
-        background: linear-gradient(90deg, #FFFFFF 0%, #D4FF70 60%, #22D3EE 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 300; 
-      }
+    .snap-container {
+      height: 100vh;
+      width: 100vw;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      /* UPDATED: Proximity prevents getting "stuck" on large sections */
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+      perspective: 1px;
+      /* Performance enhancement */
+    }
 
-      /* Button Shine Effect */
-      .btn-shine {
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-      }
-      
-      .btn-shine::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
+    .snap-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      /* Padding ensures content isn't hidden behind fixed headers on mobile */
+      padding-top: 80px;
+      padding-bottom: 40px;
+    }
+
+    /* --- SMART GRADIENT (ADAPTIVE CONTRAST) --- */
+    /* Light Mode: Dark Gradient for readability */
+    .text-grad-multiversa {
+      background: linear-gradient(90deg, #000000 0%, #4D7C0F 50%, #0891B2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    /* Dark Mode: Light Gradient for glow */
+    html.dark .text-grad-multiversa {
+      background: linear-gradient(90deg, #FFFFFF 0%, #D4FF70 60%, #22D3EE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 300;
+    }
+
+    /* Button Shine Effect */
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn-shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
           transparent,
           rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: left 0.5s ease;
-      }
-      
-      .btn-shine:hover::before {
-        left: 100%;
-      }
+          transparent);
+      transition: left 0.5s ease;
+    }
 
-      /* Glowing Border Container */
-      .glow-border-container {
-        position: relative;
-        z-index: 0;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      
-      .glow-border-container::before {
-        content: "";
-        position: absolute;
-        z-index: -2;
-        left: -50%;
-        top: -50%;
-        width: 200%;
-        height: 200%;
-        background-color: transparent;
-        background-repeat: no-repeat;
-        background-size: 50% 50%, 50% 50%;
-        background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-        background-image: linear-gradient(transparent, transparent), linear-gradient(90deg, #D4FF70, #22D3EE);
-        animation: border-spin 4s linear infinite;
-        will-change: transform; /* GPU Optimization */
-      }
-      
-      .glow-border-container::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        left: 1px;
-        top: 1px;
-        width: calc(100% - 2px);
-        height: calc(100% - 2px);
-        background: #000;
-        border-radius: 12px;
-      }
-      
-      html:not(.dark) .glow-border-container::after {
-        background: #FFFFFF;
-      }
+    .btn-shine:hover::before {
+      left: 100%;
+    }
 
-      /* Standard Glass */
-      .glass-cinematic {
-        background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(0, 0, 0, 0.08); 
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-      
-      .glass-cinematic:hover {
-        background: rgba(255, 255, 255, 0.8);
-        border-color: rgba(77, 124, 15, 0.3); 
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        transform: translateY(-2px);
-      }
+    /* Glowing Border Container */
+    .glow-border-container {
+      position: relative;
+      z-index: 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
 
-      html.dark .glass-cinematic {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-      }
+    .glow-border-container::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      left: -50%;
+      top: -50%;
+      width: 200%;
+      height: 200%;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: 50% 50%, 50% 50%;
+      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+      background-image: linear-gradient(transparent, transparent), linear-gradient(90deg, #D4FF70, #22D3EE);
+      animation: border-spin 4s linear infinite;
+      will-change: transform;
+      /* GPU Optimization */
+    }
 
-      html.dark .glass-cinematic:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(212, 255, 112, 0.2); 
-        box-shadow: 0 0 30px rgba(190, 242, 100, 0.1);
-      }
+    .glow-border-container::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 1px;
+      top: 1px;
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
+      background: #000;
+      border-radius: 12px;
+    }
 
-      .header-dock {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
-      }
-      
-      html.dark .header-dock {
-        background: rgba(10, 10, 12, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.8);
-      }
+    html:not(.dark) .glow-border-container::after {
+      background: #FFFFFF;
+    }
 
-      .snap-container::-webkit-scrollbar { width: 0px; background: transparent; }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      
-      ::selection {
-        background: rgba(212, 255, 112, 0.2);
-        color: #D4FF70;
-      }
-      
-      html:not(.dark) ::selection {
-        background: rgba(77, 124, 15, 0.2);
-        color: #4D7C0F;
-      }
+    /* Standard Glass */
+    .glass-cinematic {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
 
-      /* Markdown Styles */
-      .markdown-body { font-size: 0.925rem; line-height: 1.7; color: inherit; }
-      .markdown-body p { margin-bottom: 0.8em; }
-      .markdown-body p:last-child { margin-bottom: 0; }
-      .markdown-body ul, .markdown-body ol { margin-bottom: 0.8em; padding-left: 1.4em; list-style-position: outside; }
-      .markdown-body ul { list-style-type: disc; }
-      .markdown-body ol { list-style-type: decimal; }
-      .markdown-body li { margin-bottom: 0.3em; padding-left: 0.2em; }
-      .markdown-body strong { font-weight: 600; color: inherit; }
-      .markdown-body h1, .markdown-body h2, .markdown-body h3 { font-weight: 600; margin-top: 1.2em; margin-bottom: 0.6em; font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.9; }
-      .markdown-body a { text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
-      .markdown-body blockquote { border-left: 2px solid rgba(255,255,255,0.2); padding-left: 1em; font-style: italic; opacity: 0.8; margin-bottom: 0.8em; }
-    </style>
+    .glass-cinematic:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(77, 124, 15, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    html.dark .glass-cinematic {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    html.dark .glass-cinematic:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(212, 255, 112, 0.2);
+      box-shadow: 0 0 30px rgba(190, 242, 100, 0.1);
+    }
+
+    .header-dock {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    html.dark .header-dock {
+      background: rgba(10, 10, 12, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+    }
+
+    .snap-container::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    ::selection {
+      background: rgba(212, 255, 112, 0.2);
+      color: #D4FF70;
+    }
+
+    html:not(.dark) ::selection {
+      background: rgba(77, 124, 15, 0.2);
+      color: #4D7C0F;
+    }
+
+    /* Markdown Styles */
+    .markdown-body {
+      font-size: 0.925rem;
+      line-height: 1.7;
+      color: inherit;
+    }
+
+    .markdown-body p {
+      margin-bottom: 0.8em;
+    }
+
+    .markdown-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body ul,
+    .markdown-body ol {
+      margin-bottom: 0.8em;
+      padding-left: 1.4em;
+      list-style-position: outside;
+    }
+
+    .markdown-body ul {
+      list-style-type: disc;
+    }
+
+    .markdown-body ol {
+      list-style-type: decimal;
+    }
+
+    .markdown-body li {
+      margin-bottom: 0.3em;
+      padding-left: 0.2em;
+    }
+
+    .markdown-body strong {
+      font-weight: 600;
+      color: inherit;
+    }
+
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3 {
+      font-weight: 600;
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+    }
+
+    .markdown-body a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 500;
+    }
+
+    .markdown-body blockquote {
+      border-left: 2px solid rgba(255, 255, 255, 0.2);
+      padding-left: 1em;
+      font-style: italic;
+      opacity: 0.8;
+      margin-bottom: 0.8em;
+    }
+
+    /* Suggestion Chips */
+    .suggestion-chip {
+      white-space: nowrap;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      background-color: #18181B;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.625rem;
+      color: #D4D4D8;
+      transition: all 0.2s;
+    }
+
+    .suggestion-chip:hover {
+      border-color: #D4FF70;
+      color: #D4FF70;
+      background-color: rgba(212, 255, 112, 0.05);
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -268,8 +371,10 @@
 }
 </script>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
