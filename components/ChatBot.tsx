@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { sendMessageToGemini, ChatMessage } from '../services/gemini';
+import { memorySystem } from '../services/supabase';
 import { Lang } from '../utils/translations';
 
 interface ChatBotProps {
@@ -15,10 +16,15 @@ interface ChatBotProps {
 
 type ChatStage = 'idle' | 'captured_plan' | 'awaiting_payment_choice' | 'showing_payment_data' | 'ticket_ready';
 
+// Placeholder for Aureon's Avatar - Replace with your uploaded image URL
+const AUREON_IMAGE = "https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3"; 
+
 const ChatBot: React.FC<ChatBotProps> = ({ lang, text, externalState, onClose, userName }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [contextLoaded, setContextLoaded] = useState(false);
   
   // Lead Flow State
   const [stage, setStage] = useState<ChatStage>('idle');
@@ -37,13 +43,38 @@ const ChatBot: React.FC<ChatBotProps> = ({ lang, text, externalState, onClose, u
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // --- INITIALIZATION & TRIGGERS ---
+  // --- SUPABASE INITIALIZATION ---
+  useEffect(() => {
+    const initMemory = async () => {
+        if (!userName) return;
+        try {
+            const id = await memorySystem.identifyUser(userName);
+            if (id) {
+                setLeadId(id);
+                // Load previous context if any
+                const context = await memorySystem.getContext(id);
+                if (context && context.length > 0) {
+                     // Optionally prepend context or just keep it for the AI logic
+                     // For UI, we might want to show a "Welcome back" message instead of loading old chat history to keep UI clean,
+                     // but pass the history to Gemini.
+                     console.log("Memory loaded:", context.length, "messages");
+                }
+                setContextLoaded(true);
+            }
+        } catch (e) {
+            console.error("Memory initialization failed", e);
+        }
+    };
+    initMemory();
+  }, [userName]);
+
+  // --- TRIGGER HANDLER ---
   useEffect(() => {
     if (externalState.isOpen) {
         scrollToBottom();
         setTimeout(() => inputRef.current?.focus(), 150);
 
-        if (externalState.intent) {
+        if (externalState.intent && stage === 'idle') {
             setReservationData(prev => ({ ...prev, plan: externalState.intent }));
             setStage('captured_plan');
             
@@ -52,24 +83,36 @@ const ChatBot: React.FC<ChatBotProps> = ({ lang, text, externalState, onClose, u
                 ? `¡Esa es la actitud${nameGreet}! 🚀 **${externalState.intent}** es una inversión brutal.\n\nPara armarte la propuesta a medida, cuéntame: ¿Desde qué ciudad o país nos escribes?`
                 : `That's the spirit${nameGreet}! 🚀 **${externalState.intent}** is a killer investment.\n\nTo tailor this for you, tell me: Which city or country are you writing from?`;
             
-            setMessages(prev => [...prev, { role: 'model', content: introMsg }]);
+            addMessage('model', introMsg);
         }
     }
   }, [externalState.isOpen, externalState.intent, lang, userName]);
 
+  // --- INITIAL GREETING ---
   useEffect(() => {
-    if (messages.length === 0) {
+    if (messages.length === 0 && externalState.isOpen && !externalState.intent) {
         const nameGreet = userName ? `, ${userName}` : '';
         const greeting = lang === 'es' 
-            ? `¡Qué tal${nameGreet}! Soy Auréon ✨. Tu copiloto en Multiversa. ¿En qué idea andas trabajando hoy?` 
-            : `What's up${nameGreet}! I'm Auréon ✨. Your co-pilot at Multiversa. What idea are you working on today?`;
+            ? `¡Qué tal${nameGreet}! Soy Auréon ✨. Tu consultor digital en Multiversa. ¿En qué idea andas trabajando hoy?` 
+            : `What's up${nameGreet}! I'm Auréon ✨. Your digital consultant at Multiversa. What idea are you working on today?`;
+        
+        // Only add if not already there
         setMessages([{ role: 'model', content: greeting }]);
     }
-  }, [lang, userName]);
+  }, [lang, userName, externalState.isOpen]);
 
   useEffect(() => {
     if (externalState.isOpen) scrollToBottom();
   }, [messages, externalState.isOpen]);
+
+  // --- HELPER TO ADD & SAVE MESSAGES ---
+  const addMessage = (role: 'user' | 'model', content: string) => {
+      setMessages(prev => [...prev, { role, content }]);
+      // Persist to Supabase
+      if (leadId) {
+          memorySystem.saveMessage(leadId, role, content);
+      }
+  };
 
   // --- WHATSAPP GENERATOR ---
   const generateWhatsAppLink = () => {
@@ -96,9 +139,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
     const textToSend = manualText || input;
     if (!textToSend.trim() || isLoading) return;
 
-    // Add user message immediately
-    const userMsg: ChatMessage = { role: 'user', content: textToSend };
-    setMessages(prev => [...prev, userMsg]);
+    addMessage('user', textToSend);
     setInput('');
     setIsLoading(true);
 
@@ -115,8 +156,8 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
 
         if (isVzla) {
             empathyMsg = lang === 'es'
-                ? `Oye, he visto las noticias y sé que hay tensión y conmoción por allá... De verdad admiro que sigas apostando a construir en medio de todo. ✊ Tu inversión se va a multiplicar, ya verás que saldremos adelante.`
-                : `Hey, I've seen the news and I know there's tension over there... I really admire that you keep building amidst it all. ✊ Your investment will multiply, we'll get through this.`;
+                ? `Oye, he visto las noticias y sé que hay tensión y conmoción por allá... De verdad admiro que sigas apostando a construir en medio de todo. ✊ Tu inversión se va a multiplicar.`
+                : `Hey, I've seen the news and I know there's tension over there... I really admire that you keep building amidst it all. ✊ Your investment will multiply.`;
             
             paymentOptions = lang === 'es'
                 ? `Para tu comodidad, ¿prefieres usar **Binance (USDT)** o **Pago Móvil**?`
@@ -132,7 +173,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
         }
 
         setTimeout(() => {
-            setMessages(prev => [...prev, { role: 'model', content: `${empathyMsg}\n\n${paymentOptions}` }]);
+            addMessage('model', `${empathyMsg}\n\n${paymentOptions}`);
             setStage('awaiting_payment_choice');
             setIsLoading(false);
         }, 1200);
@@ -155,7 +196,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
         }
 
         setTimeout(() => {
-            setMessages(prev => [...prev, { role: 'model', content: detailsMsg }]);
+            addMessage('model', detailsMsg);
             
             // Trigger Ticket Generation after a brief pause
             setTimeout(() => {
@@ -163,12 +204,10 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
                  setReservationData(prev => ({ ...prev, ticketId }));
                  setStage('ticket_ready');
                  
-                 setMessages(prev => [...prev, { 
-                     role: 'model', 
-                     content: lang === 'es' 
+                 addMessage('model', lang === 'es' 
                         ? "Estoy generando tu Ticket de Pre-Reserva... Un momento 📠" 
                         : "Generating your Pre-Reservation Ticket... One moment 📠" 
-                 }]);
+                 );
                  setIsLoading(false);
             }, 1500);
 
@@ -176,15 +215,20 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
         return;
     }
 
-    // --- STANDARD AI CHAT (Fallback) ---
-    const history = messages;
+    // --- STANDARD AI CHAT (Consultant Mode with Memory) ---
     const delay = Math.random() * 800 + 600; 
 
     setTimeout(async () => {
-        const responseText = await sendMessageToGemini(history, userMsg.content, lang, userName);
-        setMessages(prev => [...prev, { role: 'model', content: responseText }]);
+        // Load context again just in case (though we usually have local history)
+        const contextMemory = leadId ? await memorySystem.getContext(leadId) : [];
+        
+        const responseText = await sendMessageToGemini(messages, userMsg.content, lang, userName, contextMemory);
+        addMessage('model', responseText);
         setIsLoading(false);
     }, delay);
+
+    // Need access to the message just added in the closure, so we reconstruct:
+    const userMsg: ChatMessage = { role: 'user', content: textToSend };
   };
 
   const triggers = [
@@ -195,7 +239,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
 
   return (
     <>
-       {/* FAB */}
+       {/* FAB (Icon Outside) */}
        {!externalState.isOpen && (
            <div className="fixed bottom-8 right-6 z-40 animate-reveal">
                 <button 
@@ -218,18 +262,22 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
 
             <div className="relative w-full max-w-[480px] h-[85vh] max-h-[750px] bg-black rounded-3xl flex flex-col overflow-hidden shadow-2xl border border-white/10 animate-scale-up">
                 
-                {/* Header */}
+                {/* Header (With Image Inside) */}
                 <div className="px-5 py-4 bg-[#09090B] border-b border-white/5 flex justify-between items-center shrink-0">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-lime-neon flex items-center justify-center shadow-lg shadow-lime-neon/20">
-                            <span className="text-black font-bold font-serif text-xl">M</span>
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-[0_0_15px_rgba(212,255,112,0.3)] border border-lime-neon/50">
+                            {/* Aureon Image */}
+                            <img src={AUREON_IMAGE} alt="Auréon" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500" />
+                            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-lime-neon rounded-full border border-black animate-pulse"></div>
                         </div>
                         <div>
                             <h3 className="text-white text-base font-medium tracking-tight flex items-center gap-2">
                                 Auréon {userName ? `· ${userName}` : ''}
-                                <span className="w-2 h-2 rounded-full bg-lime-neon animate-pulse"></span>
                             </h3>
-                            <p className="text-[11px] text-zinc-500">{text.powered}</p>
+                            <p className="text-[10px] text-lime-neon/80 font-mono tracking-wider flex items-center gap-1">
+                                {text.powered}
+                                {contextLoaded && <span className="w-1 h-1 rounded-full bg-lime-neon"></span>}
+                            </p>
                         </div>
                     </div>
                     <button 
@@ -244,6 +292,13 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
                 <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-black scroll-smooth">
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                            
+                            {msg.role === 'model' && (
+                                <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mr-2 mt-2 opacity-50 border border-white/10">
+                                    <img src={AUREON_IMAGE} alt="AI" className="w-full h-full object-cover grayscale" />
+                                </div>
+                            )}
+
                             <div className={`max-w-[85%] px-5 py-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
                                 msg.role === 'user' 
                                 ? 'bg-lime-neon text-black rounded-br-none font-medium' 
@@ -262,7 +317,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
                     
                     {/* TICKET UI RENDER */}
                     {stage === 'ticket_ready' && reservationData.ticketId && (
-                         <div className="animate-reveal mx-auto max-w-[90%] bg-zinc-900 border border-lime-neon/30 rounded-xl p-0 overflow-hidden shadow-[0_0_30px_rgba(212,255,112,0.1)] mb-4">
+                         <div className="animate-reveal mx-auto max-w-[90%] bg-zinc-900 border border-lime-neon/30 rounded-xl p-0 overflow-hidden shadow-[0_0_30px_rgba(212,255,112,0.1)] mb-4 mt-4">
                              <div className="bg-lime-neon p-3 flex justify-between items-center">
                                  <span className="text-black font-bold font-mono text-xs tracking-widest">MULTIVERSA TICKET</span>
                                  <span className="text-black font-bold text-xs">#{reservationData.ticketId}</span>
@@ -308,6 +363,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
 
                     {isLoading && (
                         <div className="flex justify-start">
+                            <div className="w-6 h-6 mr-2"></div>
                             <div className="bg-[#121214] px-4 py-3 rounded-2xl rounded-bl-none border border-white/5 flex gap-1.5 items-center">
                                 <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce"></span>
                                 <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></span>
@@ -318,7 +374,7 @@ Ya tengo los datos de pago. Quedo atento para confirmar y comenzar. 🚀`;
                     <div ref={messagesEndRef} />
                 </div>
 
-                {/* Input Area (Disabled when ticket is ready to force WA flow) */}
+                {/* Input Area */}
                 <div className="bg-[#09090B] border-t border-white/5 shrink-0 flex flex-col">
                     {stage !== 'ticket_ready' && (
                         <div className="flex gap-2 overflow-x-auto p-3 no-scrollbar pb-0">
