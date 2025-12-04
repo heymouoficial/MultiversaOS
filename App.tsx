@@ -7,6 +7,7 @@ import TechStack from './components/TechStack';
 import FinalCTA from './components/FinalCTA';
 import ChatBot from './components/ChatBot';
 import FAQ from './components/FAQ';
+import Team from './components/Team';
 import { t, Lang } from './utils/translations';
 import { DottedSurface } from './components/ui/dotted-surface';
 
@@ -81,6 +82,19 @@ const App: React.FC = () => {
     });
 
     return () => revealObserver.disconnect();
+  }, []);
+
+  // Cursor Glow Tracking
+  const cursorRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${e.clientX}px`;
+        cursorRef.current.style.top = `${e.clientY}px`;
+      }
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // const handleNameSubmit = () => {
@@ -258,6 +272,10 @@ const App: React.FC = () => {
           <Workflow lang={lang} text={text.workflow} />
         </section>
 
+        <section id="team" ref={(el) => (sectionRefs.current['team'] = el)} className="snap-section">
+          <Team lang={lang} />
+        </section>
+
         <section id="final" ref={(el) => (sectionRefs.current['final'] = el)} className="snap-section justify-start pt-20 overflow-y-auto">
           <FAQ lang={lang} text={text.faq} />
           <FinalCTA lang={lang} text={text.cta} onAction={() => handleOpenChat('Final Interest')} />
@@ -268,6 +286,9 @@ const App: React.FC = () => {
           </div>
         </section>
       </main>
+
+      {/* Cursor Glow Aura */}
+      <div ref={cursorRef} className="cursor-glow hidden md:block" />
 
       <ChatBot
         lang={lang}

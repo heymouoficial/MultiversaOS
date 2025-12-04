@@ -299,6 +299,25 @@
       color: #D4FF70;
     }
 
+    /* Subtle Cursor Glow Aura */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.15;
+      background: radial-gradient(circle, rgba(212, 255, 112, 0.4) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      mix-blend-mode: screen;
+    }
+
+    html:not(.dark) .cursor-glow {
+      opacity: 0.08;
+      background: radial-gradient(circle, rgba(77, 124, 15, 0.3) 0%, transparent 70%);
+    }
+
     html:not(.dark) ::selection {
       background: rgba(77, 124, 15, 0.2);
       color: #4D7C0F;

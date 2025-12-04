@@ -103,12 +103,11 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
                 for (let iy = 0; iy < AMOUNTY; iy++) {
                     const index = i * 3;
 
-                    // Animate Y position with sine waves - AGGRESSIVE MOVEMENT
-                    // Using a larger multiplier for 'count' speeds it up
-                    // Using a larger multiplier for the result increases amplitude
+                    // Animate Y position with sine waves - ZEN MOVEMENT (slower)
+                    // Reduced multipliers for calmer, more meditative motion
                     positions[index + 1] =
-                        (Math.sin((ix + count) * 0.5) * 50) +
-                        (Math.sin((iy + count) * 0.5) * 50);
+                        (Math.sin((ix + count) * 0.3) * 30) +
+                        (Math.sin((iy + count) * 0.3) * 30);
 
                     i++;
                 }
@@ -116,11 +115,11 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
 
             positionAttribute.needsUpdate = true;
 
-            // Continuous rotation
-            scene.rotation.y += 0.002;
+            // Slower, calmer rotation for zen effect
+            scene.rotation.y += 0.0008;
 
             renderer.render(scene, camera);
-            count += 0.1; // Faster speed
+            count += 0.03; // Much slower for zen feeling
         };
 
         animate(); // Start animation loop
