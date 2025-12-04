@@ -41,6 +41,7 @@ const App: React.FC = () => {
     }
   }, [isDark]);
 
+
   // Scroll Observer for Nav Rail
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -60,6 +61,26 @@ const App: React.FC = () => {
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  // Ethereal Scroll Reveal Observer
+  useEffect(() => {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.scroll-reveal').forEach((el) => {
+      revealObserver.observe(el);
+    });
+
+    return () => revealObserver.disconnect();
   }, []);
 
   // const handleNameSubmit = () => {
@@ -241,7 +262,9 @@ const App: React.FC = () => {
           <FAQ lang={lang} text={text.faq} />
           <FinalCTA lang={lang} text={text.cta} onAction={() => handleOpenChat('Final Interest')} />
           <div className="w-full py-6 text-center text-[10px] text-zinc-500 dark:text-zinc-600 font-mono tracking-widest border-t border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/40 backdrop-blur-md">
-            MULTIVERSA OS [BETA] • 2024
+            <span>{text.footer?.copyright || '© 2025-2026 Multiversa Group, LLC'}</span>
+            <span className="mx-2">·</span>
+            <span className="text-lime-600 dark:text-lime-neon/80">{text.footer?.powered || 'Powered By AI & heyMou'}</span>
           </div>
         </section>
       </main>

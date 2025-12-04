@@ -32,13 +32,13 @@ export const t = {
     },
     pricing: {
       title: "Niveles de Acceso",
-      subtitle: "Upgrade your reality",
+      subtitle: "Elige tu realidad digital",
       freelancer: "NanoWeb",
-      freelancerQuote: "Web inteligente con Core Gemini integrado. Realiza consultas sobre tu negocio en tiempo real y brinda asistencia estratégica al dueño.",
+      freelancerQuote: "Tu LinkTree vitaminado con Gemini Core activo. Flujo guiado inteligente que consulta tu negocio, genera reportes y orienta a tus clientes — sin ser chatbot, actúa como stepper estratégico.",
       pyme: "SmartWeb",
-      pymeQuote: "Ecosistema profesional de Agentes IA. Incluye Chatbots avanzados con integración nativa a WhatsApp y automatización de ventas.",
+      pymeQuote: "Ecosistema completo de Agentes IA. Chatbot conversacional avanzado con integración nativa a WhatsApp, automatización de ventas 24/7 y CRM inteligente.",
       enterprise: "Custom Web",
-      enterpriseQuote: "Arquitectura Enterprise y DevOps. Integración total de flujos de trabajo, automatización y backend híbrido escalable.",
+      enterpriseQuote: "Arquitectura Enterprise con visión holística. Integración total de flujos, automatización backend y escalabilidad sin límites.",
       customStack: ["Next.js Frontend", "Hybrid Backend (FastAPI/Django)", "Supabase & Vector DB", "Flowise AI Workflows", "Chatwoot & Evolution API", "n8n Automation"],
       soon: "COTIZAR",
       specs: "Specs",
@@ -50,32 +50,33 @@ export const t = {
       row4Smart: "< 36 Horas"
     },
     workflow: {
-      title: "Capabilities",
+      title: "System Workflow",
+      subtitle: "Proceso ágil, resultados tangibles",
       step1Title: "Discovery & Branding",
-      step1Desc: "Definimos la identidad única. Construimos confianza.",
+      step1Desc: "Definimos tu identidad única. Construimos confianza desde el primer pixel.",
       step2Title: "Architecture & Design",
-      step2Desc: "Diseño UX/UI conectado a objetivos de negocio.",
+      step2Desc: "Diseño UX/UI alineado a objetivos de negocio y experiencia de usuario.",
       step3Title: "Development & AI",
-      step3Desc: "Implementación en código limpio. Agentes inteligentes.",
+      step3Desc: "Implementación en código limpio. Agentes inteligentes que trabajan por ti.",
       step4Title: "Launch & Growth",
-      step4Desc: "Despliegue global. Análisis de datos en tiempo real."
+      step4Desc: "Despliegue global en Edge. Análisis de datos y optimización continua."
     },
     faq: {
       title: "Preguntas Frecuentes",
       q1: "¿Cuánto tiempo toma la entrega?",
-      a1: "NanoWeb: 4-6 horas. SmartWeb: 24-36 horas.",
-      q2: "¿Qué pasa después del mes?",
-      a2: "El sitio es tuyo. Sin lock-in.",
+      a1: "NanoWeb se entrega en 4-6 horas. SmartWeb requiere 24-36 horas para integrar todos los agentes IA, automatizaciones y pruebas de calidad.",
+      q2: "¿Qué diferencia hay entre NanoWeb y SmartWeb?",
+      a2: "NanoWeb es un stepper inteligente con Gemini Core que guía a tus clientes y consulta tu negocio — no es chatbot. SmartWeb incluye chatbot conversacional completo, WhatsApp automation y agentes IA avanzados.",
       q3: "¿Mis datos están seguros?",
-      a3: "Seguridad Enterprise con Supabase y Vercel.",
+      a3: "Absolutamente. Usamos Supabase (PostgreSQL) con Row Level Security y despliegue en Vercel Edge. Cumplimos estándares enterprise de seguridad.",
       q4: "¿Puedo escalar después?",
-      a4: "Sí. Escalar es un simple upgrade de software.",
+      a4: "Sí. La arquitectura está diseñada para crecer. Escalar de NanoWeb a SmartWeb es una actualización de software, no una migración.",
       q5: "¿Qué tecnología usan?",
-      a5: "Next.js 14, Supabase (PostgreSQL) y Gemini Pro.",
-      q6: "¿Se conecta con mi CRM?",
-      a6: "Sí, SmartWeb incluye integración con CRMs vía API.",
+      a5: "Next.js 14, TypeScript, Supabase (PostgreSQL), Gemini Pro, Vercel Edge y opciones de n8n para automatizaciones avanzadas.",
+      q6: "¿Se conecta con mi CRM o WhatsApp?",
+      a6: "SmartWeb incluye integración nativa con WhatsApp Business via Evolution API y conectores a CRMs populares. NanoWeb puede enviar datos a cualquier webhook.",
       q7: "¿Ofrecen soporte continuo?",
-      a7: "Incluimos 30 días de garantía y soporte prioritario."
+      a7: "Incluimos 30 días de garantía y soporte prioritario. Planes de mantenimiento disponibles para actualizaciones y nuevas funcionalidades."
     },
     cta: {
       title: "¿Listo? Reserva Tu",
@@ -97,6 +98,10 @@ export const t = {
         stack: "Stack Tecnológico",
         pay: "Formato de Pago"
       }
+    },
+    footer: {
+      copyright: "© 2025-2026 Multiversa Group, LLC",
+      powered: "Powered By AI & heyMou"
     }
   },
   en: {
@@ -129,13 +134,13 @@ export const t = {
     },
     pricing: {
       title: "Access Levels",
-      subtitle: "Upgrade your reality",
+      subtitle: "Choose your digital reality",
       freelancer: "NanoWeb",
-      freelancerQuote: "Intelligent Web with integrated Gemini Core. Run real-time queries about your business and get strategic assistance for the owner.",
+      freelancerQuote: "Your enhanced LinkTree with active Gemini Core. Intelligent guided flow that queries your business, generates reports and guides your clients — not a chatbot, acts as a strategic stepper.",
       pyme: "SmartWeb",
-      pymeQuote: "Professional AI Agent Ecosystem. Includes advanced Chatbots with native WhatsApp integration and sales automation.",
+      pymeQuote: "Complete AI Agents ecosystem. Advanced conversational chatbot with native WhatsApp integration, 24/7 sales automation and intelligent CRM.",
       enterprise: "Custom Web",
-      enterpriseQuote: "Enterprise Architecture & DevOps. Full workflow integration, automation, and scalable hybrid backend.",
+      enterpriseQuote: "Enterprise Architecture with holistic vision. Full workflow integration, backend automation and limitless scalability.",
       customStack: ["Next.js Frontend", "Hybrid Backend (FastAPI/Django)", "Supabase & Vector DB", "Flowise AI Workflows", "Chatwoot & Evolution API", "n8n Automation"],
       soon: "GET QUOTE",
       specs: "Specs",
@@ -147,32 +152,33 @@ export const t = {
       row4Smart: "< 36 Hours"
     },
     workflow: {
-      title: "Capabilities",
+      title: "System Workflow",
+      subtitle: "Agile process, tangible results",
       step1Title: "Discovery & Branding",
-      step1Desc: "Defining unique identity. Building trust.",
+      step1Desc: "Defining your unique identity. Building trust from the first pixel.",
       step2Title: "Architecture & Design",
-      step2Desc: "UX/UI design connected to business goals.",
+      step2Desc: "UX/UI design aligned with business goals and user experience.",
       step3Title: "Development & AI",
-      step3Desc: "Clean code implementation. Intelligent agents.",
+      step3Desc: "Clean code implementation. Intelligent agents working for you.",
       step4Title: "Launch & Growth",
-      step4Desc: "Global deployment. Real-time data analysis."
+      step4Desc: "Global Edge deployment. Data analysis and continuous optimization."
     },
     faq: {
       title: "Frequently Asked Questions",
       q1: "How long does delivery take?",
-      a1: "NanoWeb: 4-6 hours. SmartWeb: 24-36 hours.",
-      q2: "What happens after the month?",
-      a2: "The site is yours. No lock-in.",
-      q3: "Are my data safe?",
-      a3: "Enterprise security with Supabase and Vercel.",
+      a1: "NanoWeb delivers in 4-6 hours. SmartWeb requires 24-36 hours to integrate all AI agents, automations and quality testing.",
+      q2: "What's the difference between NanoWeb and SmartWeb?",
+      a2: "NanoWeb is an intelligent stepper with Gemini Core that guides your clients and queries your business — it's not a chatbot. SmartWeb includes full conversational chatbot, WhatsApp automation and advanced AI agents.",
+      q3: "Is my data secure?",
+      a3: "Absolutely. We use Supabase (PostgreSQL) with Row Level Security and Vercel Edge deployment. Enterprise security standards compliant.",
       q4: "Can I scale later?",
-      a4: "Yes. Scaling is a simple software upgrade.",
+      a4: "Yes. The architecture is designed to grow. Scaling from NanoWeb to SmartWeb is a software upgrade, not a migration.",
       q5: "What technology do you use?",
-      a5: "Next.js 14, Supabase (PostgreSQL) and Gemini Pro.",
-      q6: "Does it connect with my CRM?",
-      a6: "Yes, SmartWeb includes CRM integration via API.",
+      a5: "Next.js 14, TypeScript, Supabase (PostgreSQL), Gemini Pro, Vercel Edge and n8n options for advanced automations.",
+      q6: "Does it connect with my CRM or WhatsApp?",
+      a6: "SmartWeb includes native WhatsApp Business integration via Evolution API and connectors to popular CRMs. NanoWeb can send data to any webhook.",
       q7: "Do you offer ongoing support?",
-      a7: "We include 30 days of warranty and priority support."
+      a7: "We include 30 days warranty and priority support. Maintenance plans available for updates and new features."
     },
     cta: {
       title: "Ready? Reserve Your",
@@ -194,6 +200,10 @@ export const t = {
         stack: "Tech Stack",
         pay: "Payment Methods"
       }
+    },
+    footer: {
+      copyright: "© 2025-2026 Multiversa Group, LLC",
+      powered: "Powered By AI & heyMou"
     }
   }
 };
