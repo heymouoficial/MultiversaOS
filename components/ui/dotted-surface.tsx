@@ -61,11 +61,8 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
                 const z = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
 
                 positions.push(x, y, z);
-                if (theme === 'dark') {
-                    colors.push(0.3, 0.3, 0.35); // Slightly brighter/bluer in dark mode
-                } else {
-                    colors.push(0.1, 0.1, 0.1);
-                }
+                // Always use dark theme colors for consistent animated 3D effect
+                colors.push(0.3, 0.3, 0.35);
             }
         }
 
@@ -75,12 +72,12 @@ export function DottedSurface({ className, theme = 'dark', ...props }: DottedSur
         );
         geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
-        // Create material
+        // Create material - consistent for both themes
         const material = new THREE.PointsMaterial({
-            size: theme === 'dark' ? 6 : 8, // Smaller dots for elegance
+            size: 6,
             vertexColors: true,
             transparent: true,
-            opacity: theme === 'dark' ? 0.6 : 0.4,
+            opacity: 0.5,
             sizeAttenuation: true,
         });
 
