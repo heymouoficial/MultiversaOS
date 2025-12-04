@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import Hero from './components/Hero';
 import Pricing from './components/Pricing';

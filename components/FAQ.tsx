@@ -14,10 +14,7 @@ const FAQ: React.FC<FAQProps> = ({ text }) => {
     { q: text.q1, a: text.a1 },
     { q: text.q2, a: text.a2 },
     { q: text.q3, a: text.a3 },
-    { q: text.q4, a: text.a4 },
-    { q: text.q5, a: text.a5 },
-    { q: text.q6, a: text.a6 },
-    { q: text.q7, a: text.a7 }
+    { q: text.q4, a: text.a4 }
   ];
 
   return (

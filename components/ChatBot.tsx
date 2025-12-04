@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { sendMessageToGemini, ChatMessage } from '../services/gemini';
-import { memorySystem } from '../services/supabase';
 import { Lang } from '../utils/translations';
 
 interface ChatBotProps {

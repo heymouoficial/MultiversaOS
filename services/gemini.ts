@@ -59,7 +59,7 @@ export const sendMessageToGemini = async (history: ChatMessage[], message: strin
         - Venezuela: Empatiza con los retos de conectividad. "Entiendo los desafíos de operar desde allá. Por eso un sistema que trabaje solo es invaluable."
         `,
       },
-      history: fullHistory.map(h => ({
+      history: history.map(h => ({
         role: h.role,
         parts: [{ text: h.content }]
       }))
