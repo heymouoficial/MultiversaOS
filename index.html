@@ -26,6 +26,8 @@
   <meta property="twitter:description"
     content="Despliega tu presencia digital en el Multiverso. Web inteligente potenciada por Gemini 2.0.">
   <meta property="twitter:image" content="https://multiversa.agency/og-image.jpg">
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -33,23 +35,16 @@
       theme: {
         extend: {
           colors: {
-            zinc: {
-              950: '#09090B',
-              900: '#101012',
-              800: '#27272A',
-              400: '#A1A1AA',
-            },
-            black: {
-              DEFAULT: '#020104',
-              void: '#000000'
-            },
             lime: {
               neon: '#D4FF70',
-              glow: '#BEF264',
+              glow: '#D4FF70',
               dim: '#4D7C0F',
             },
             cyan: {
               glow: '#22D3EE',
+            },
+            violet: {
+              deep: '#2D1B69',
             }
           },
           fontFamily: {
@@ -62,6 +57,8 @@
             'reveal': 'reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
             'border-spin': 'border-spin 4s linear infinite',
             'flow-line': 'flowLine 3s linear infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'scale-up': 'scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
           },
           keyframes: {
             float: {
@@ -78,6 +75,14 @@
             flowLine: {
               '0%': { strokeDashoffset: '24' },
               '100%': { strokeDashoffset: '0' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            scaleUp: {
+              '0%': { opacity: '0', transform: 'scale(0.95)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
             }
           }
         }
@@ -133,6 +138,7 @@
     .text-grad-multiversa {
       background: linear-gradient(90deg, #000000 0%, #4D7C0F 50%, #0891B2 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 600;
     }
@@ -141,6 +147,7 @@
     html.dark .text-grad-multiversa {
       background: linear-gradient(90deg, #FFFFFF 0%, #D4FF70 60%, #22D3EE 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 300;
     }

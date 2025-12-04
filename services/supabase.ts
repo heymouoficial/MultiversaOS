@@ -21,32 +21,43 @@ export const memorySystem = {
         }
 
         // Check if exists
-        const { data: existing } = await supabase
-            .from('leads')
-            .select('id')
-            .eq('fingerprint', fingerprint)
-            .single();
-
-        if (existing) {
-            // Update name if provided and different
-            if (name) {
-                await supabase.from('leads').update({ name, last_seen: new Date() }).eq('id', existing.id);
-            }
-            return existing.id;
-        } else {
-            // Create new
-            const { data: newLead, error } = await supabase
+        try {
+            const { data: existing, error } = await supabase
                 .from('leads')
-                .insert([{ fingerprint, name }])
                 .select('id')
+                .eq('fingerprint', fingerprint)
                 .single();
 
             if (error) {
-                console.error("Error creating lead:", error);
+                // If table doesn't exist or other error, just return null (don't crash)
+                console.warn("Supabase error (likely missing table):", error.message);
                 return null;
             }
-            return newLead.id;
+
+            if (existing) {
+                // Update name if provided and different
+                if (name) {
+                    await supabase.from('leads').update({ name, last_seen: new Date() }).eq('id', existing.id);
+                }
+                return existing.id;
+            }
+        } catch (err) {
+            console.warn("Supabase connection error:", err);
+            return null;
         }
+
+        // Create new
+        const { data: newLead, error } = await supabase
+            .from('leads')
+            .insert([{ fingerprint, name }])
+            .select('id')
+            .single();
+
+        if (error) {
+            console.error("Error creating lead:", error);
+            return null;
+        }
+        return newLead.id;
     },
 
     // Save Chat Message
