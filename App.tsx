@@ -190,9 +190,8 @@ const App: React.FC = () => {
           </>
         ) : (
           <>
-            <div className="absolute top-[30%] left-[20%] w-[60vw] h-[60vh] bg-lime-200/40 blur-[120px] rounded-full animate-pulse-slow mix-blend-multiply opacity-50"></div>
-            <div className="absolute bottom-[10%] right-[10%] w-[40vw] h-[40vw] bg-cyan-200/40 blur-[100px] rounded-full mix-blend-multiply animate-float opacity-50"></div>
-            <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:20px_20px]"></div>
+            <div className="absolute top-[30%] left-[20%] w-[60vw] h-[60vh] bg-lime-200/30 blur-[120px] rounded-full animate-pulse-slow mix-blend-multiply opacity-40"></div>
+            <div className="absolute bottom-[10%] right-[10%] w-[40vw] h-[40vw] bg-cyan-200/30 blur-[100px] rounded-full mix-blend-multiply animate-float opacity-40"></div>
           </>
         )}
       </div>
