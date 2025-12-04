@@ -1,7 +1,10 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+// Initialize conditionally
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -9,6 +12,13 @@ export interface ChatMessage {
 }
 
 export const sendMessageToGemini = async (history: ChatMessage[], message: string, lang: 'es' | 'en', userName?: string, contextMemory: ChatMessage[] = []): Promise<string> => {
+  if (!ai) {
+    console.warn("Gemini API Key is missing. Returning fallback response.");
+    return lang === 'es' 
+      ? "Lo siento, mi conexión neuronal (API Key) no está configurada. Por favor contacta al administrador." 
+      : "Sorry, my neural connection (API Key) is not configured. Please contact the administrator.";
+  }
+
   try {
     const userContext = userName ? `El nombre del usuario es ${userName}. Úsalo para generar confianza.` : '';
     
@@ -17,7 +27,7 @@ export const sendMessageToGemini = async (history: ChatMessage[], message: strin
     const fullHistory = [...contextMemory, ...history].slice(-15); 
 
     const chat = ai.chats.create({
-      model: 'gemini-3-pro-preview',
+      model: 'gemini-2.0-flash-exp',
       config: {
         systemInstruction: `Eres Auréon, Consultor Senior de IA en Multiversa Agency.
         
@@ -64,9 +74,18 @@ export const sendMessageToGemini = async (history: ChatMessage[], message: strin
 };
 
 export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en', userName?: string): Promise<{ recommendation: string; reasoning: string; features: string[]; time: string }> => {
+  if (!ai) {
+     return { 
+        recommendation: "SmartWeb", 
+        reasoning: lang === 'es' ? "Modo Demo (Sin API Key). Recomendación por defecto." : "Demo Mode (No API Key). Default recommendation.",
+        features: ["AI Chatbot", "Dynamic CMS", "Analytics"],
+        time: "36h"
+    };
+  }
+
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview',
+      model: 'gemini-2.0-flash-exp',
       contents: `You are an AI Software Architect. Analyze the user's project idea and generate a "Digital Blueprint".
       
       User Input: "${description}"
