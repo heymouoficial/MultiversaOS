@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Pricing from './components/Pricing';
 import Workflow from './components/Workflow';
 import TechStack from './components/TechStack';
+import TechCarousel from './components/TechCarousel';
 import FinalCTA from './components/FinalCTA';
 import ChatBot from './components/ChatBot';
 import FAQ from './components/FAQ';
@@ -262,6 +263,7 @@ const App: React.FC = () => {
 
         <section id="stack" ref={(el) => (sectionRefs.current['stack'] = el)} className="snap-section">
           <TechStack lang={lang} text={text.stack} />
+          <TechCarousel />
         </section>
 
         <section id="pricing" ref={(el) => (sectionRefs.current['pricing'] = el)} className="snap-section">

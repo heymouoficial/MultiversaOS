@@ -26,11 +26,11 @@ export const memorySystem = {
                 .from('leads')
                 .select('id')
                 .eq('fingerprint', fingerprint)
-                .single();
+                .maybeSingle(); // Use maybeSingle to handle 0 results gracefully
 
             if (error) {
                 // If table doesn't exist or other error, just return null (don't crash)
-                console.warn("Supabase error (likely missing table):", error.message);
+                console.warn("Supabase error:", error.message);
                 return null;
             }
 
