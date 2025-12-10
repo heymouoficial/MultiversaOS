@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { analyzeProjectNeeds } from '../services/gemini';
 import { Lang } from '../utils/translations';
+import LogoLoop from './LogoLoop';
 
 interface HeroProps {
     lang: Lang;
@@ -31,23 +31,47 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
             {/* --- ATMOSPHERE LAYERS --- */}
             <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] bg-gradient-radial from-violet-glow/10 via-transparent to-transparent opacity-60 pointer-events-none mix-blend-screen blur-3xl dark:opacity-60 opacity-30"></div>
 
-            <div className="z-10 max-w-[90vw] md:max-w-7xl mx-auto flex flex-col items-center text-center relative">
+            {/* Ghost Cursor Background */}
+            <div className="absolute inset-0 z-0 opacity-40">
+                {/* Dynamically imported to avoid SSR issues if needed, but direct use is fine for client apps */}
+                {/* <GhostCursor color="#a3e635" /> // lime-400 equivalent */}
+            </div>
 
-                {/* Main Title */}
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight mb-8 leading-[1.1] text-zinc-900 dark:text-white select-none drop-shadow-2xl text-balance mt-10 md:mt-0 transition-colors duration-500">
-                    {text.h1} <br className="hidden md:block" />
-                    <span className="text-grad-multiversa italic font-light relative inline-block">
+            <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-32 md:pt-48 pb-20 flex flex-col items-center text-center">
+
+                {/* Badge */}
+                <div className="mb-8 animate-fade-in-down rounded-full px-3 py-1 bg-lime-500/10 dark:bg-lime-neon/10 border border-lime-500/30 dark:border-lime-neon/30 backdrop-blur-md">
+                    <span className="text-[10px] md:text-xs font-mono font-bold text-lime-700 dark:text-lime-neon tracking-[0.2em] uppercase">
+                        {text.spots}
+                    </span>
+                </div>
+
+                {/* Main Heading */}
+                <h1 className="flex flex-col items-center justify-center font-light tracking-tighter leading-[0.9] mb-8 select-none">
+                    <span className="text-5xl md:text-8xl lg:text-9xl text-zinc-900 dark:text-white mix-blend-difference animate-slide-up bg-clip-text text-transparent bg-gradient-to-b from-zinc-800 to-black dark:from-white dark:to-zinc-400">
+                        {text.h1}
+                    </span>
+                    <span className="text-5xl md:text-8xl lg:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-lime-500 to-emerald-600 dark:from-lime-300 dark:to-emerald-400 italic font-medium animate-slide-up" style={{ animationDelay: '0.1s' }}>
                         {text.h2}
-                        {/* Glow behind text */}
-                        <span className="absolute inset-0 bg-lime-neon/20 blur-2xl -z-10 opacity-30"></span>
                     </span>
                 </h1>
 
-                {/* Subhead */}
-                <p className="text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl font-light mb-16 leading-relaxed tracking-wide px-4 transition-colors duration-500">
+                {/* Description */}
+                <p className="max-w-2xl text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                     {text.p}
-                    <span className="block mt-4 text-[10px] md:text-xs text-lime-600 dark:text-lime-neon/60 font-mono tracking-[0.15em] opacity-80 uppercase">{text.powered}</span>
                 </p>
+
+                {/* Powered By */}
+                <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                    <p className="text-[10px] font-mono text-lime-600 dark:text-lime-neon/70 tracking-widest uppercase flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-lime-500 rounded-full animate-pulse"></span>
+                        {text.powered}
+                    </p>
+                </div>
+                {/* LOGO LOOP - TECH STACK */}
+                <div className="w-full mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                    <LogoLoop />
+                </div>
 
                 {/* UTILITY CONSOLE - AI ARCHITECT */}
                 <div className="w-full max-w-2xl relative group mx-4">

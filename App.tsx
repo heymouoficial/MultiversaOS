@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import Hero from './components/Hero';
 import Pricing from './components/Pricing';
 import Workflow from './components/Workflow';
-import TechStack from './components/TechStack';
-import TechCarousel from './components/TechCarousel';
+import LogoLoop from './components/LogoLoop';
 import FinalCTA from './components/FinalCTA';
 import ChatBot from './components/ChatBot';
 import FAQ from './components/FAQ';
-import Team from './components/Team';
+import Testimonials from './components/Testimonials';
+import GhostCursor from './components/GhostCursor';
 import { t, Lang } from './utils/translations';
 import { DottedSurface } from './components/ui/dotted-surface';
 
@@ -19,8 +19,6 @@ const App: React.FC = () => {
 
   // Identity State
   const [userName, setUserName] = useState<string>('');
-  // const [showWelcomeModal, setShowWelcomeModal] = useState(false); // REMOVED
-  // const [tempName, setTempName] = useState(''); // REMOVED
 
   // Refs for sections to track scrolling
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
@@ -30,10 +28,6 @@ const App: React.FC = () => {
     if (storedName) {
       setUserName(storedName);
     }
-    // else {
-    //     const timer = setTimeout(() => setShowWelcomeModal(true), 500);
-    //     return () => clearTimeout(timer);
-    // }
 
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -97,15 +91,6 @@ const App: React.FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // const handleNameSubmit = () => {
-  //     if (tempName.trim()) {
-  //         const name = tempName.trim();
-  //         setUserName(name);
-  //         localStorage.setItem('multiversa_user', name);
-  //         setShowWelcomeModal(false);
-  //     }
-  // };
-
   const toggleLang = () => setLang(prev => prev === 'es' ? 'en' : 'es');
   const toggleTheme = () => setIsDark(!isDark);
 
@@ -163,7 +148,12 @@ const App: React.FC = () => {
   return (
     <div className={`relative w-full h-screen overflow-hidden ${isDark ? 'bg-black text-zinc-100' : 'bg-zinc-100 text-zinc-900'} transition-colors duration-500 selection:bg-lime-neon/30`}>
 
-      {/* --- WELCOME MODAL REMOVED --- */}
+      {/* --- GHOST CURSOR EFFECT --- */}
+      <GhostCursor
+        color={isDark ? "#D4FF70" : "#65a30d"} // Lime Neon vs Lime 600
+        bloomStrength={0.5}
+        bloomRadius={2}
+      />
 
       {/* --- NAVIGATION RAIL (USER JOURNEY) --- */}
       <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-4 items-center">
@@ -202,21 +192,24 @@ const App: React.FC = () => {
         <header className="header-dock h-14 rounded-2xl px-4 flex gap-4 items-center shadow-2xl transition-colors duration-500">
           {/* Logo */}
           <div className="flex items-center gap-3 select-none cursor-pointer" onClick={() => scrollToSection('home')}>
+            {/* UPDATED LOGO */}
+            <img src="/Logotipo.svg" alt="Multiversa Logo" className="h-6 w-auto" />
+            {/* 
             <div className="w-2.5 h-2.5 rounded-full bg-lime-600 dark:bg-lime-neon shadow-[0_0_12px_rgba(77,124,15,0.5)] dark:shadow-[0_0_12px_#D4FF70] animate-pulse"></div>
             <div className="flex flex-col leading-none">
               <span className="text-sm font-bold tracking-[0.2em] text-zinc-900 dark:text-white">MULTIVERSA</span>
-              <span className="text-[8px] font-mono text-zinc-500 dark:text-lime-neon/80 tracking-widest text-right">OS v0.9.5</span>
+              <span className="text-[8px] font-mono text-zinc-500 dark:text-lime-neon/80 tracking-widest text-right">AGENCY</span>
             </div>
+             */}
           </div>
 
           <div className="h-6 w-[1px] bg-black/10 dark:bg-white/10 hidden md:block"></div>
 
           <nav className="hidden md:flex gap-1">
-            <NavButton targetId="home" label="Home" labelEs="Inicio" />
+            <NavButton targetId="home" label="Lobby" labelEs="Lobby" />
             <NavButton targetId="stack" label="Core" labelEs="Core" />
-            <NavButton targetId="pricing" label="Access" labelEs="Acceso" />
+            <NavButton targetId="pricing" label="Plans" labelEs="Planes" />
             <NavButton targetId="workflow" label="Process" labelEs="Proceso" />
-            <NavButton targetId="team" label="Team" labelEs="Equipo" />
           </nav>
         </header>
 
@@ -228,11 +221,10 @@ const App: React.FC = () => {
           >
             {/* Flag */}
             {lang === 'es' ? (
-              <span className="text-base" title="Venezuela">🇻🇪</span>
+              <span className="text-base" title="Español">ES</span>
             ) : (
-              <span className="text-base" title="USA">🇺🇸</span>
+              <span className="text-base" title="English">EN</span>
             )}
-            <span className="uppercase tracking-wider">{lang === 'es' ? 'ESP' : 'ENG'}</span>
           </button>
 
           <button
@@ -248,7 +240,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* --- STATUS BADGE (Bottom-left on mobile, top-right on desktop) --- */}
+      {/* --- STATUS BADGE --- */}
       <div className="fixed bottom-24 left-4 md:bottom-auto md:top-6 md:left-auto md:right-8 z-50">
         <div className="h-8 md:h-10 rounded-full px-2.5 md:px-3 flex items-center gap-1.5 md:gap-2 border border-lime-neon/60 bg-lime-neon/90 shadow-[0_0_15px_rgba(212,255,112,0.3)] backdrop-blur-sm">
           <span className="relative flex h-1.5 w-1.5">
@@ -264,34 +256,34 @@ const App: React.FC = () => {
       {/* --- CONTENT --- */}
       <main className="snap-container relative z-10" id="scroll-container">
 
-        <section id="home" ref={(el) => (sectionRefs.current['home'] = el)} className="snap-section">
+        <section id="home" ref={(el) => { sectionRefs.current['home'] = el; }} className="snap-section">
           <Hero lang={lang} text={text.hero} onOpenChat={handleOpenChat} userName={userName} />
         </section>
 
-        <section id="stack" ref={(el) => (sectionRefs.current['stack'] = el)} className="snap-section">
-          <TechStack lang={lang} text={text.stack} />
-          <TechCarousel />
+        <section id="stack" ref={(el) => { sectionRefs.current['stack'] = el; }} className="snap-section">
+          <LogoLoop />
         </section>
 
-        <section id="pricing" ref={(el) => (sectionRefs.current['pricing'] = el)} className="snap-section">
+        <section id="pricing" ref={(el) => { sectionRefs.current['pricing'] = el; }} className="snap-section">
           <Pricing lang={lang} text={text.pricing} onSelectPlan={handleOpenChat} />
         </section>
 
-        <section id="workflow" ref={(el) => (sectionRefs.current['workflow'] = el)} className="snap-section">
+        <section id="workflow" ref={(el) => { sectionRefs.current['workflow'] = el; }} className="snap-section">
           <Workflow lang={lang} text={text.workflow} />
         </section>
 
-        <section id="team" ref={(el) => (sectionRefs.current['team'] = el)} className="snap-section">
-          <Team lang={lang} />
+        {/* CHANGED: Replaced Team with Testimonials */}
+        <section id="testimonials" className="snap-section">
+          <Testimonials lang={lang} />
         </section>
 
-        <section id="final" ref={(el) => (sectionRefs.current['final'] = el)} className="snap-section justify-start pt-20 overflow-y-auto">
+        <section id="final" ref={(el) => { sectionRefs.current['final'] = el; }} className="snap-section justify-start pt-20 overflow-y-auto">
           <FAQ lang={lang} text={text.faq} />
           <FinalCTA lang={lang} text={text.cta} onAction={() => handleOpenChat('Final Interest')} />
           <div className="w-full py-6 text-center text-[10px] text-zinc-500 dark:text-zinc-600 font-mono tracking-widest border-t border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/40 backdrop-blur-md">
-            <span>{text.footer?.copyright || '© 2025-2026 Multiversa Group, LLC'}</span>
+            <span>{text.footer?.copyright}</span>
             <span className="mx-2">·</span>
-            <span className="text-lime-600 dark:text-lime-neon/80">{text.footer?.powered || 'Powered By AI & heyMou'}</span>
+            <span className="text-lime-600 dark:text-lime-neon/80">{text.footer?.powered}</span>
           </div>
         </section>
       </main>
