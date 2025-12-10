@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { analyzeProjectNeeds } from '../services/gemini';
 import { Lang } from '../utils/translations';
-import LogoLoop from './LogoLoop';
 
 interface HeroProps {
     lang: Lang;
@@ -56,22 +55,12 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
                     </span>
                 </h1>
 
-                {/* Description */}
-                <p className="max-w-2xl text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                {/* LOGO LOOP REMOVED - MOVED TO APP.TSX FOR FULL WIDTH */}
+
+                {/* Description - Added spacing */}
+                <p className="max-w-2xl text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-20 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                     {text.p}
                 </p>
-
-                {/* Powered By */}
-                <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                    <p className="text-[10px] font-mono text-lime-600 dark:text-lime-neon/70 tracking-widest uppercase flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-lime-500 rounded-full animate-pulse"></span>
-                        {text.powered}
-                    </p>
-                </div>
-                {/* LOGO LOOP - TECH STACK */}
-                <div className="w-full mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                    <LogoLoop />
-                </div>
 
                 {/* UTILITY CONSOLE - AI ARCHITECT */}
                 <div className="w-full max-w-2xl relative group mx-4">

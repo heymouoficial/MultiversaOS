@@ -161,9 +161,12 @@ const App: React.FC = () => {
           <button
             key={id}
             onClick={() => scrollToSection(id)}
-            className={`w-1.5 rounded-full transition-all duration-300 ${activeSection === id ? 'h-8 bg-lime-600 dark:bg-lime-neon shadow-[0_0_10px_currentColor]' : 'h-1.5 bg-zinc-400/50 hover:bg-zinc-400'}`}
+            className={`group relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 focus:outline-none`}
             title={id.toUpperCase()}
-          />
+            aria-label={`Scroll to ${id}`}
+          >
+            <span className={`absolute w-1.5 rounded-full transition-all duration-300 ${activeSection === id ? 'h-8 bg-lime-600 dark:bg-lime-neon shadow-[0_0_10px_currentColor]' : 'h-1.5 bg-zinc-400/50 group-hover:bg-zinc-400'}`}></span>
+          </button>
         ))}
       </div>
 
@@ -217,6 +220,7 @@ const App: React.FC = () => {
         <div className="flex gap-2">
           <button
             onClick={toggleLang}
+            aria-label="Toggle Language"
             className="header-dock h-14 rounded-2xl px-4 text-[11px] font-mono font-medium text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-lime-500 dark:hover:border-lime-neon/50 transition-all flex items-center gap-2.5 group"
           >
             {/* Flag */}
@@ -229,6 +233,7 @@ const App: React.FC = () => {
 
           <button
             onClick={toggleTheme}
+            aria-label="Toggle Theme"
             className="header-dock w-14 h-14 rounded-2xl flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-yellow-600 dark:hover:text-yellow-300 border border-black/5 dark:border-white/10 hover:border-yellow-500 dark:hover:border-yellow-300/50 transition-all group"
           >
             {isDark ? (

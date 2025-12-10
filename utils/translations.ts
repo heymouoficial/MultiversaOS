@@ -11,9 +11,9 @@ export const t = {
     },
     hero: {
       spots: "10 PLAZAS DISPONIBLES // NAVIDAD",
-      h1: "Tu Presencia Digital",
-      h2: "En El Ecosistema.",
-      p: "Creamos y Aceleramos tu realidad con IA. 10 Espacios exclusivos para desplegar Blueprints de alto impacto hoy mismo.",
+      h1: "Tu presencia digital potenciada por nuestra Inteligencia Artificial",
+      h2: "",
+      p: "Creamos y Aceleramos tu negocio con IA. 10 Espacios exclusivos para desplegar Blueprints de alto impacto hoy mismo.",
       powered: "Powered by Gemini Multimodal & Agency Core.",
       input: "Cuéntanos tu idea...",
       button: "MATERIALIZAR VISIÓN",
@@ -33,7 +33,6 @@ export const t = {
     pricing: {
       title: "Niveles de Sincronización",
       subtitle: "Elige tu vehículo de expansión",
-      freelancer: "NanoWeb",
       freelancerQuote: "Lo esencial para vender profesionalmente.",
       freelancerStack: ["Landing Page (5 Secciones Clave)", "Diseño High-Convert", "Hosting Incluido (1 año)", "Integración WhatsApp/Email", "Formulario de Contacto"],
       pyme: "SmartWeb AI",
@@ -69,7 +68,7 @@ export const t = {
       step4Desc: " decisiones basadas en datos reales para crecimiento continuo."
     },
     faq: {
-      title: "Preguntas Frecuentes",
+      title: "PREGUNTAS FRECUENTES",
       questions: [
         {
           q: "¿Quiénes somos y qué es Multiversa Agency?",
@@ -134,7 +133,7 @@ export const t = {
       ]
     },
     testimonials: {
-      title: "Historias de Éxito",
+      title: "Equipo & Talentos",
       subtitle: "Visionarios que ya están en el Multiverso",
       t1: {
         name: "Nico",
@@ -143,16 +142,28 @@ export const t = {
         image: "/assets/team-nico.png"
       },
       t2: {
-        name: "Carmelo",
-        role: "Consultor de Negocios",
-        quote: "Estructuración de modelos de negocio escalables y visión estratégica para expansión internacional.",
-        image: "/assets/team-carmelo.png"
+        name: "Runa Gold",
+        role: "BioHacking Cuántico",
+        quote: "Branding y Diseño Holístico. Elevando la vibración visual de las marcas en el ecosistema.",
+        image: "/assets/team-runa.png"
       },
       t3: {
         name: "Mario",
         role: "Fungix",
         quote: "Un caso de estudio para borrar sesgos sobre tecnología ancestral. Ecosistema educativo para potenciar memoria y atención con microdosis.",
         image: "/assets/team-mario.png"
+      },
+      t4: {
+        name: "Carmelo Petti",
+        role: "Consultor de Negocios",
+        quote: "Estructuración de modelos de negocio escalables y visión estratégica para expansión internacional.",
+        image: "/assets/team-carmelo.png"
+      },
+      t5: {
+        name: "MouQ",
+        role: "Tecnología con Visión Holistica",
+        quote: "Arquitecto de Realidades Digitales. Fusionando código y consciencia para sistemas vivos.",
+        image: "/assets/team-mouq.png"
       }
     },
     cta: {
@@ -190,9 +201,9 @@ export const t = {
     },
     hero: {
       spots: "10 SPOTS AVAILABLE // CHRISTMAS",
-      h1: "Your Digital Presence",
-      h2: "In The Ecosystem.",
-      p: "We create and accelerate your reality with AI. 10 Exclusive spots to deploy high-impact Blueprints today.",
+      h1: "Your Digital Presence powered by our Artificial Intelligence",
+      h2: "",
+      p: "We create and accelerate your business with AI. 10 Exclusive spots to deploy high-impact Blueprints today.",
       powered: "Powered by Gemini Multimodal & Agency Core.",
       input: "Tell us, what vision do you want to materialize?",
       button: "MATERIALIZE VISION",
@@ -248,7 +259,7 @@ export const t = {
       step4Desc: "Data-driven decisions for continuous growth."
     },
     faq: {
-      title: "Frequently Asked Questions",
+      title: "FREQUENTLY ASKED QUESTIONS",
       questions: [
         {
           q: "Who are we and what is Multiversa Agency?",
@@ -313,7 +324,7 @@ export const t = {
       ]
     },
     testimonials: {
-      title: "Success Stories",
+      title: "Team & Talents",
       subtitle: "Visionaries already in the Multiverse",
       t1: {
         name: "Nico",
@@ -322,16 +333,28 @@ export const t = {
         image: "/assets/team-nico.png"
       },
       t2: {
-        name: "Carmelo",
-        role: "Business Consultant",
-        quote: "Structuring scalable business models and strategic vision for international expansion.",
-        image: "/assets/team-carmelo.png"
+        name: "Runa Gold",
+        role: "Quantum BioHacking",
+        quote: "Branding and Holistic Design. Elevating the visual vibration of brands in the ecosystem.",
+        image: "/assets/team-runa.png"
       },
       t3: {
         name: "Mario",
         role: "Fungix",
         quote: "Case study to erase bias on ancestral technology. Educational ecosystem to boost memory and focus with microdosing.",
         image: "/assets/team-mario.png"
+      },
+      t4: {
+        name: "Carmelo Petti",
+        role: "Business Consultant",
+        quote: "Structuring scalable business models and strategic vision for international expansion.",
+        image: "/assets/team-carmelo.png"
+      },
+      t5: {
+        name: "MouQ",
+        role: "Tech with Holistic Vision",
+        quote: "Architect of Digital Realities. Merging code and consciousness for living systems.",
+        image: "/assets/team-mouq.png"
       }
     },
     cta: {

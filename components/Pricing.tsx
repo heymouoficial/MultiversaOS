@@ -15,12 +15,6 @@ const Pricing: React.FC<PricingProps> = ({ lang, text, onSelectPlan }) => {
         bestValue: lang === 'es' ? 'Mejor Opción' : 'Best Value',
         reserveSpot: lang === 'es' ? 'Reservar Spot' : 'Reserve Spot',
         enterprise: lang === 'es' ? 'Empresarial' : 'Enterprise',
-        nanoFeatures: lang === 'es'
-            ? ['Astro + Gemini Core', 'Flujo guiado inteligente', 'Entrega 6 horas']
-            : ['Astro + Gemini Core', 'Intelligent guided flow', '6h Delivery'],
-        smartFeatures: lang === 'es'
-            ? ['Next.js + Supabase', 'WhatsApp Business', 'Entrega 36 horas']
-            : ['Next.js + Supabase', 'WhatsApp Business', '36h Delivery']
     };
     return (
         <div className="w-full h-full flex flex-col justify-center items-center px-4 relative py-20 md:py-32">
@@ -42,9 +36,14 @@ const Pricing: React.FC<PricingProps> = ({ lang, text, onSelectPlan }) => {
                     <div className="md:col-span-1 glass-cinematic p-6 rounded-3xl flex flex-col relative group bg-white/60 dark:bg-black/40 border border-black/5 dark:border-white/5 transition-colors duration-500 h-[420px]">
                         <h3 className="text-xl font-normal text-zinc-900 dark:text-white mb-2">{text.freelancer}</h3>
                         <div className="w-8 h-0.5 bg-zinc-300 dark:bg-zinc-700 mb-4"></div>
-                        <p className="text-zinc-600 dark:text-zinc-400 text-xs leading-6 mb-auto font-light">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-xs leading-6 mb-4 font-light">
                             {text.freelancerQuote}
                         </p>
+                        <ul className="space-y-1 mb-auto text-[10px] text-zinc-500 dark:text-zinc-400 font-mono">
+                            {text.freelancerStack?.map((feat: string, i: number) => (
+                                <li key={i} className="flex items-center gap-2"><span>•</span> {feat}</li>
+                            ))}
+                        </ul>
                         <div className="pt-4 border-t border-black/5 dark:border-white/5 w-full mt-4">
                             <span className="text-2xl font-light text-zinc-900 dark:text-white block mb-3">$200</span>
                             <button
@@ -73,7 +72,7 @@ const Pricing: React.FC<PricingProps> = ({ lang, text, onSelectPlan }) => {
                             </p>
 
                             <ul className="grid grid-cols-2 gap-2 mb-auto text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-                                {t.smartFeatures.map((feat, i) => (
+                                {text.pymeStack?.map((feat: string, i: number) => (
                                     <li key={i} className="flex items-center gap-2"><span className="text-lime-600 dark:text-lime-neon">✓</span> {feat}</li>
                                 ))}
                             </ul>

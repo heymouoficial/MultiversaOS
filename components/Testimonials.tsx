@@ -13,7 +13,9 @@ const Testimonials: React.FC<TestimonialsProps> = ({ lang }) => {
     const testimonials = [
         content.t1,
         content.t2,
-        content.t3
+        content.t3,
+        content.t4,
+        content.t5
     ];
 
     return (
