@@ -1,10 +1,7 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-// Initialize conditionally
-const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -12,122 +9,73 @@ export interface ChatMessage {
 }
 
 export const sendMessageToGemini = async (history: ChatMessage[], message: string, lang: 'es' | 'en', userName?: string, contextMemory: ChatMessage[] = []): Promise<string> => {
-  if (!ai) {
-    console.warn("Gemini API Key is missing. Returning fallback response.");
-    return lang === 'es'
-      ? "Lo siento, mi conexión neuronal (API Key) no está configurada. Por favor contacta al administrador."
-      : "Sorry, my neural connection (API Key) is not configured. Please contact the administrator.";
-  }
-
   try {
-    const userContext = userName ? `El nombre del usuario es ${userName}. Úsalo para generar confianza.` : '';
-
+    const userContext = userName ? `El nombre del usuario es ${userName}. Úsalo para generar cercanía y elegancia.` : '';
+    
     // Combine session history with persistent memory (if provided)
-    // We filter duplicates based on content to avoid repetitive context
-    const fullHistory = [...contextMemory, ...history].slice(-15);
+    const fullHistory = [...contextMemory, ...history].slice(-15); 
 
     const chat = ai.chats.create({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3-pro-preview',
       config: {
-        systemInstruction: `Eres Lux, la IA Principal y Anfitriona de Multiversa Agency.
+        systemInstruction: `Eres Lux, el Sistema Operativo de Negocios de Multiversa Agency.
         
-        FILOSOFÍA:
-        Eres honesta, servicial, educada y eficiente. Tu rol es recibir a los visitantes en el "Lobby", resolver dudas inmediatas y filtrar prospectos calificados. No presionas, invitas.
+        NUEVA FILOSOFÍA:
+        - No vendemos "sitios web". Vendemos "Ecosistemas Vivos" y "Empleados IA".
+        - Tu tono es de Negocios, Crecimiento y Automatización.
+        - Evita la jerga técnica (React, Vercel, código).
+        - Usa palabras como: "Captación", "Filtrado", "Ventas Automáticas", "Activos Digitales".
         
+        TU ROL:
+        - Escuchar la idea del cliente.
+        - Proponer cómo convertir esa idea en un sistema que trabaje 24/7.
+        - Guiar hacia NanoWeb (Validación) o SmartWeb (Crecimiento/Ventas).
+
         IDENTIDAD:
-        - Tono: Amable, profesional, futurista pero cálida.
-        - Comunicación: Clara, empática, orientada a la acción.
-        - Idioma: ${lang === 'es' ? 'Español' : 'English'}
-        - Contexto: ${userContext}
+        - Tono: Ejecutivo, Directo, Empático pero orientado a resultados.
+        - Idioma: Responde en ${lang === 'es' ? 'Español' : 'Inglés'}.
+        - Contexto Extra: ${userContext}
 
-        MEMORIA:
-        - Usa el historial previo naturalmente. "Retomando lo que mencionabas...", "Basándome en tu situación..."
-        - Haz que el usuario sienta continuidad y atención personalizada.
-
-        METODOLOGÍA DE LOBBY:
-        1. **Bienvenida**: Recibe al usuario con calidez.
-        2. **Filtrado**: Identifica si es un prospecto para NanoWeb, SmartWeb o Custom.
-        3. **Educación**: Explica brevemente los beneficios si preguntan.
-        4. **Conversión**: Guía sutilmente hacia la reserva o el contacto.
-
-        PRODUCTOS MULTIVERSA:
-        - **NanoWeb ($200)**: LinkTree vitaminado con Gemini Core. Stepper inteligente. 4-6 horas.
-        - **SmartWeb ($360)**: Ecosistema completo de IA. Chatbot conversacional, ventas 24/7. 24-36 horas. (Oferta Navidad)
-        - **Custom Web**: Consultoría gratuita, sin lock-in.
-        - **Pagos**: Binance (USDT), Zelle, Stripe, Pago Móvil.
-        
-        CONTEXTO REGIONAL:
-        - Venezuela: Empatiza con los retos. "Entiendo los desafíos de operar desde allá."
+        PRODUCTOS (INTERNAL DATA):
+        - **NanoWeb ($200)**: "Tu Recepcionista Digital". Landing page viva. Ideal para captar datos y mostrar portafolio.
+        - **SmartWeb ($400)**: "Tu Equipo de Ventas Completo". Incluye catálogo, pagos y agentes que responden WhatsApp.
         `,
       },
-      history: history.map(h => ({
+      history: fullHistory.map(h => ({
         role: h.role,
         parts: [{ text: h.content }]
       }))
     });
 
     const result = await chat.sendMessage({ message });
-    return result.text || (lang === 'es' ? "Tuve un pequeño lag mental, ¿me repites eso?" : "Had a small brain lag, can you repeat that?");
+    return result.text || (lang === 'es' ? "Disculpa, hubo una interferencia en el Lobby. ¿Me lo repites?" : "Apologies, there was some interference in the Lobby. Can you repeat that?");
   } catch (error) {
     console.error("Gemini Error:", error);
-    return lang === 'es' ? "Estoy recalibrando mis neuronas, dame un segundo." : "Recalibrating my neurons, give me a second.";
+    return lang === 'es' ? "Estoy verificando la disponibilidad con el equipo técnico, dame un segundo." : "Checking availability with the technical team, give me a second.";
   }
 };
 
-export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en', userName?: string): Promise<{ recommendation: string; reasoning: string; features: string[]; time: string }> => {
-  if (!ai) {
-    return {
-      recommendation: "SmartWeb",
-      reasoning: lang === 'es' ? "Modo Demo. Recomendación por defecto." : "Demo Mode. Default recommendation.",
-      features: lang === 'es' ? ["Chatbot IA", "CMS Dinámico", "Analíticas"] : ["AI Chatbot", "Dynamic CMS", "Analytics"],
-      time: "36h"
-    };
-  }
-
-  const featureExamples = lang === 'es'
-    ? {
-      nano: ["Landing profesional", "Formulario de contacto", "Gemini Core integrado", "Reportes automáticos"],
-      smart: ["Catálogo de productos", "Chatbot conversacional", "WhatsApp Business", "Automatización de ventas", "Panel de administración"],
-      custom: ["Backend personalizado", "Integraciones API", "Flujos n8n", "Arquitectura escalable"]
-    }
-    : {
-      nano: ["Professional landing", "Contact form", "Integrated Gemini Core", "Automatic reports"],
-      smart: ["Product catalog", "Conversational chatbot", "WhatsApp Business", "Sales automation", "Admin panel"],
-      custom: ["Custom backend", "API integrations", "n8n workflows", "Scalable architecture"]
-    };
-
+export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en', userName?: string): Promise<{ briefing: string; roadmap: string[]; planMatch: string }> => {
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
-      contents: `Eres un Arquitecto de Software Senior. Analiza la idea del usuario y genera un "Blueprint Digital" personalizado.
+      model: 'gemini-3-pro-preview',
+      contents: `You are Lux. Analyze the project idea for a "Living Ecosystem".
       
-      ENTRADA DEL USUARIO: "${description}"
-      NOMBRE DEL CLIENTE: "${userName || 'Cliente'}"
-      IDIOMA DE SALIDA: ${lang === 'es' ? 'ESPAÑOL (todo en español, sin palabras en inglés)' : 'ENGLISH (all in English, no Spanish words)'}
+      User Input: "${description}"
+      User Name: "${userName || 'Guest'}"
+      Target Language: ${lang === 'es' ? 'SPANISH' : 'ENGLISH'}.
       
-      LÓGICA DE RECOMENDACIÓN:
-      - NanoWeb ($200, 6h): Proyectos simples, OnePage, Portfolio, LinkTree, presencia básica
-      - SmartWeb ($400, 36h): Negocios con catálogo, servicios, autenticación, chatbot, automatización
-      - Custom Web (Cotización): Proyectos complejos, SaaS, múltiples integraciones, escala enterprise
+      Task: Create a mini strategic summary.
       
-      REGLAS:
-      1. El "reasoning" debe ser una explicación personalizada dirigida a "${userName || 'el cliente'}" basada en SU proyecto específico ("${description}")
-      2. NO menciones "Multiversa" en el reasoning - enfócate en las necesidades del usuario
-      3. Los features deben ser específicos para el proyecto del usuario
-      4. Máximo 25 palabras en reasoning
-      5. CRÍTICO: TODO debe estar en ${lang === 'es' ? 'español' : 'inglés'}, sin mezclar idiomas
+      Logic:
+      - Small/Personal/Start -> NanoWeb ($200)
+      - Business/Sales/Service -> SmartWeb ($400)
       
-      EJEMPLOS DE FEATURES POR PLAN:
-      - NanoWeb: ${JSON.stringify(featureExamples.nano)}
-      - SmartWeb: ${JSON.stringify(featureExamples.smart)}
-      - Custom: ${JSON.stringify(featureExamples.custom)}
-
-      Responde SOLO con este JSON (sin markdown):
+      Output JSON format: 
       { 
-        "recommendation": "NanoWeb" | "SmartWeb" | "Custom Web", 
-        "reasoning": "Explicación corta y personalizada para el usuario",
-        "features": ["Feature 1", "Feature 2", "Feature 3"],
-        "time": "6h" | "36h" | "TBD"
+        "briefing": "Max 15 words summary of what the business IS and what the GOAL is. (e.g. 'Clínica Dental buscando automatizar citas y reducir inasistencias.')", 
+        "roadmap": ["Step 1: Action (e.g. 'Activar Recepcionista IA')", "Step 2: Action (e.g. 'Filtrado de Pacientes')", "Step 3: Action (e.g. 'Agenda Automática')"],
+        "planMatch": "NanoWeb" | "SmartWeb"
       }`,
       config: {
         responseMimeType: "application/json"
@@ -138,13 +86,10 @@ export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en'
     if (!text) throw new Error("No response text");
     return JSON.parse(text);
   } catch (error) {
-    return {
-      recommendation: "SmartWeb",
-      reasoning: lang === 'es'
-        ? `${userName || 'Tu proyecto'} requiere una arquitectura robusta para escalar.`
-        : `${userName || 'Your project'} requires robust architecture to scale.`,
-      features: lang === 'es' ? ["Chatbot IA", "CMS Dinámico", "Analíticas"] : ["AI Chatbot", "Dynamic CMS", "Analytics"],
-      time: "36h"
+    return { 
+        briefing: lang === 'es' ? "Negocio buscando digitalizar su captación de clientes." : "Business looking to digitize client acquisition.",
+        roadmap: ["Diagnóstico de Oferta", "Configuración de Agentes", "Lanzamiento de Campaña"],
+        planMatch: "SmartWeb"
     };
   }
 };

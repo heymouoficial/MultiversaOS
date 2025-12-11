@@ -1,94 +1,91 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const SUPABASE_URL = 'https://kddzrphifmddhdfsybxl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkZHpycGhpZm1kZGhkZnN5YnhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4MDM5NzUsImV4cCI6MjA4MDM3OTk3NX0.rRPPi1ND0d_5dzo7U2cVL6_o396ZXSGuBugm1A68Oks';
 
-export const supabase = (supabaseUrl && supabaseAnonKey)
-    ? createClient(supabaseUrl, supabaseAnonKey)
-    : null;
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Memory System
 export const memorySystem = {
-    // Identify or Create User based on LocalStorage ID (Fingerprint)
-    identifyUser: async (name: string) => {
-        if (!supabase) return null;
-
-        // Simple fingerprinting: check local storage or generate one
-        let fingerprint = localStorage.getItem('multiversa_fid');
-        if (!fingerprint) {
-            fingerprint = Math.random().toString(36).substring(2) + Date.now().toString(36);
-            localStorage.setItem('multiversa_fid', fingerprint);
-        }
-
-        // Check if exists
-        try {
-            const { data: existing, error } = await supabase
-                .from('leads')
-                .select('id')
-                .eq('fingerprint', fingerprint)
-                .maybeSingle(); // Use maybeSingle to handle 0 results gracefully
-
-            if (error) {
-                // If table doesn't exist or other error, just return null (don't crash)
-                console.warn("Supabase error:", error.message);
-                return null;
-            }
-
-            if (existing) {
-                // Update name if provided and different
-                if (name) {
-                    await supabase.from('leads').update({ name, last_seen: new Date() }).eq('id', existing.id);
-                }
-                return existing.id;
-            }
-        } catch (err) {
-            console.warn("Supabase connection error:", err);
-            return null;
-        }
-
-        // Create new
-        const { data: newLead, error } = await supabase
+    // Identify or Create User
+    async identifyUser(name: string) {
+        // Simple identification by name for demo purposes. 
+        // In production, use fingerprintjs or auth.
+        const { data, error } = await supabase
             .from('leads')
-            .insert([{ fingerprint, name }])
             .select('id')
+            .eq('name', name)
             .single();
 
-        if (error) {
-            console.error("Error creating lead:", error);
-            return null;
+        if (data) return data.id;
+
+        const { data: newData, error: newError } = await supabase
+            .from('leads')
+            .insert([{ name }])
+            .select('id')
+            .single();
+        
+        return newData?.id;
+    },
+
+    // Save Message
+    async saveMessage(leadId: string, role: 'user' | 'model', content: string) {
+        if (!leadId) return;
+        
+        // Find active conversation or create one
+        let conversationId;
+        const { data: conv } = await supabase
+            .from('conversations')
+            .select('id')
+            .eq('lead_id', leadId)
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .single();
+
+        if (conv) {
+            conversationId = conv.id;
+        } else {
+            const { data: newConv } = await supabase
+                .from('conversations')
+                .insert([{ lead_id: leadId, intent: 'consulting' }])
+                .select('id')
+                .single();
+            conversationId = newConv?.id;
         }
-        return newLead.id;
+
+        if (conversationId) {
+            await supabase.from('messages').insert([{
+                conversation_id: conversationId,
+                role,
+                content
+            }]);
+        }
     },
 
-    // Save Chat Message
-    saveMessage: async (leadId: string, role: 'user' | 'model', content: string) => {
-        if (!supabase) return;
-        await supabase.from('conversations').insert([{ lead_id: leadId, role, content }]);
-    },
-
-    // Get Context (Last 20 messages)
-    getContext: async (leadId: string) => {
-        if (!supabase) return [];
+    // Retrieve Context (The "Brain")
+    async getContext(leadId: string) {
+        if (!leadId) return [];
+        
+        // Get last 5 messages from recent conversations
         const { data } = await supabase
             .from('conversations')
-            .select('role, content')
+            .select(`
+                messages (
+                    role,
+                    content,
+                    created_at
+                )
+            `)
             .eq('lead_id', leadId)
-            .order('created_at', { ascending: false }) // Get latest
-            .limit(20);
+            .order('created_at', { ascending: false })
+            .limit(1);
 
-        return data ? data.reverse() : []; // Return in chronological order
-    },
-
-    // Save Reservation
-    saveReservation: async (leadId: string, data: any) => {
-        if (!supabase) return;
-        await supabase.from('reservations').insert([{
-            lead_id: leadId,
-            ticket_id: data.ticketId,
-            plan: data.plan,
-            location: data.location,
-            payment_method: data.paymentMethod,
-            status: 'pending'
-        }]);
+        if (data && data[0]?.messages) {
+            return data[0].messages
+                .sort((a: any, b: any) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+                .map((m: any) => ({ role: m.role, content: m.content }));
+        }
+        return [];
     }
 };

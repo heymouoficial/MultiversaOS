@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { analyzeProjectNeeds } from '../services/gemini';
 import { Lang } from '../utils/translations';
@@ -11,136 +12,129 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
-    const [projectInput, setProjectInput] = useState('');
-    const [analysis, setAnalysis] = useState<{ recommendation: string; reasoning: string; features?: string[]; time?: string } | null>(null);
-    const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [projectInput, setProjectInput] = useState('');
+  const [analysis, setAnalysis] = useState<{ briefing: string; roadmap: string[]; planMatch: string } | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-    const handleAnalyze = async () => {
-        if (!projectInput.trim()) return;
-        setIsAnalyzing(true);
-        setAnalysis(null);
-        const result = await analyzeProjectNeeds(projectInput, lang, userName);
-        setAnalysis(result);
-        setIsAnalyzing(false);
-    };
+  const handleAnalyze = async () => {
+    if (!projectInput.trim()) return;
+    setIsAnalyzing(true);
+    setAnalysis(null);
+    const result = await analyzeProjectNeeds(projectInput, lang, userName);
+    setAnalysis(result);
+    setIsAnalyzing(false);
+  };
 
-    return (
-        <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden px-4 perspective-1000">
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden px-4 perspective-1000">
+      
+      {/* --- ATMOSPHERE LAYERS --- */}
+      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] bg-gradient-radial from-spring-neon/10 via-transparent to-transparent opacity-60 pointer-events-none mix-blend-screen blur-3xl dark:opacity-40 opacity-30"></div>
+      
+      <div className="z-10 max-w-[90vw] md:max-w-7xl mx-auto flex flex-col items-center text-center relative">
+        
+        {/* Main Title */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight mb-8 leading-[1.1] text-zinc-900 dark:text-white animate-reveal opacity-0 select-none drop-shadow-2xl text-balance mt-10 md:mt-0 transition-colors duration-500" style={{ animationDelay: '0.2s' }}>
+          {text.h1} <br className="hidden md:block" />
+          <span className="text-grad-multiversa italic font-light relative inline-block">
+             {text.h2}
+             {/* Glow behind text */}
+             <span className="absolute inset-0 bg-spring-neon/20 blur-2xl -z-10 opacity-30"></span>
+          </span>
+        </h1>
 
-            {/* --- ATMOSPHERE LAYERS --- */}
-            <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] bg-gradient-radial from-violet-glow/10 via-transparent to-transparent opacity-60 pointer-events-none mix-blend-screen blur-3xl dark:opacity-60 opacity-30"></div>
+        {/* Subhead */}
+        <p className="text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl font-light mb-16 animate-reveal opacity-0 leading-relaxed tracking-wide px-4 transition-colors duration-500" style={{ animationDelay: '0.4s' }}>
+            {text.p}
+            <span className="block mt-4 text-[10px] md:text-xs text-spring-text dark:text-spring-neon/60 font-mono tracking-[0.15em] opacity-80 uppercase">{text.powered}</span>
+        </p>
 
-            {/* Ghost Cursor Background */}
-            <div className="absolute inset-0 z-0 opacity-40">
-                {/* Dynamically imported to avoid SSR issues if needed, but direct use is fine for client apps */}
-                {/* <GhostCursor color="#a3e635" /> // lime-400 equivalent */}
-            </div>
-
-            <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-32 md:pt-48 pb-20 flex flex-col items-center text-center">
-
-                {/* Badge */}
-                <div className="mb-8 animate-fade-in-down rounded-full px-3 py-1 bg-lime-500/10 dark:bg-lime-neon/10 border border-lime-500/30 dark:border-lime-neon/30 backdrop-blur-md">
-                    <span className="text-[10px] md:text-xs font-mono font-bold text-lime-700 dark:text-lime-neon tracking-[0.2em] uppercase">
-                        {text.spots}
-                    </span>
-                </div>
-
-                {/* Main Heading */}
-                <h1 className="flex flex-col items-center justify-center font-light tracking-tighter leading-[0.9] mb-8 select-none">
-                    <span className="text-5xl md:text-8xl lg:text-9xl text-zinc-900 dark:text-white mix-blend-difference animate-slide-up bg-clip-text text-transparent bg-gradient-to-b from-zinc-800 to-black dark:from-white dark:to-zinc-400">
-                        {text.h1}
-                    </span>
-                    <span className="text-5xl md:text-8xl lg:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-lime-500 to-emerald-600 dark:from-lime-300 dark:to-emerald-400 italic font-medium animate-slide-up" style={{ animationDelay: '0.1s' }}>
-                        {text.h2}
-                    </span>
-                </h1>
-
-                {/* LOGO LOOP REMOVED - MOVED TO APP.TSX FOR FULL WIDTH */}
-
-                {/* Description - Added spacing */}
-                <p className="max-w-2xl text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-20 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                    {text.p}
-                </p>
-
-                {/* UTILITY CONSOLE - AI ARCHITECT */}
-                <div className="w-full max-w-2xl relative group mx-4">
-                    {/* Glow Effect behind input */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-lime-neon/20 via-cyan-500/20 to-violet-500/20 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-
-                    <div className="glass-cinematic p-2 rounded-2xl flex flex-col gap-2 relative bg-white/70 dark:bg-black/60 backdrop-blur-2xl border border-black/5 dark:border-white/10 shadow-xl transition-colors duration-500">
-
-                        {/* Input Bar */}
-                        <div className="flex flex-col md:flex-row items-center gap-2 px-4 py-3 bg-white/50 dark:bg-black/40 rounded-xl border border-black/5 dark:border-white/5 focus-within:border-lime-500 dark:focus-within:border-lime-neon/30 transition-all duration-500">
-                            <span className="text-lime-600 dark:text-lime-neon font-mono text-lg animate-pulse hidden md:block">{'>'}</span>
-                            <input
-                                type="text"
-                                value={projectInput}
-                                onChange={(e) => setProjectInput(e.target.value)}
-                                placeholder={text.input}
-                                className="w-full md:flex-1 bg-transparent border-none outline-none text-zinc-800 dark:text-zinc-100 text-sm md:text-base font-light placeholder-zinc-400 dark:placeholder-zinc-500 font-mono caret-lime-500 dark:caret-lime-neon tracking-wide text-center md:text-left"
-                                onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
-                            />
-                            <button
-                                onClick={handleAnalyze}
-                                disabled={isAnalyzing}
-                                className="w-full md:w-auto px-6 py-3 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 text-[10px] font-bold uppercase rounded-lg hover:text-lime-600 dark:hover:text-lime-neon transition-all tracking-[0.2em] border border-black/5 dark:border-white/5 hover:border-lime-500/20 dark:hover:border-lime-neon/20 active:scale-95 flex items-center justify-center gap-2 min-w-[140px]"
-                            >
-                                {isAnalyzing ? (
-                                    <span className="flex gap-1">
-                                        <span className="w-1 h-1 bg-lime-500 dark:bg-lime-neon rounded-full animate-bounce"></span>
-                                        <span className="w-1 h-1 bg-lime-500 dark:bg-lime-neon rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
-                                    </span>
-                                ) : (
-                                    <span>{text.button}</span>
-                                )}
-                            </button>
-                        </div>
-
-                        {/* BLUEPRINT RESULT CARD */}
-                        {analysis && (
-                            <div className="mt-2 text-left p-6 rounded-xl bg-zinc-50 dark:bg-[#0A0A0B] border border-lime-500/30 dark:border-lime-neon/30 relative overflow-hidden animate-reveal shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)]">
-                                {/* Card Decoration */}
-                                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-lime-500 to-cyan-500 shadow-[0_0_15px_#D4FF70]"></div>
-                                <div className="absolute top-0 right-0 text-[200px] leading-none text-black/5 dark:text-white/5 font-bold -translate-y-10 translate-x-10 pointer-events-none select-none">AI</div>
-
-                                <div className="relative z-10 grid md:grid-cols-2 gap-6">
-                                    <div>
-                                        <p className="text-zinc-500 text-[10px] font-mono mb-1 uppercase tracking-widest">
-                                    // {userName ? `BLUEPRINT FOR ${userName.toUpperCase()}` : 'STRATEGY DETECTED'}
-                                        </p>
-                                        <h3 className="text-zinc-900 dark:text-white text-xl font-medium mb-3">{analysis.recommendation} Architecture</h3>
-                                        <p className="text-zinc-600 dark:text-zinc-400 text-sm font-light leading-relaxed mb-4">{analysis.reasoning}</p>
-                                    </div>
-
-                                    <div className="flex flex-col justify-between">
-                                        <div>
-                                            <p className="text-zinc-500 text-[10px] font-mono mb-2 uppercase tracking-widest">// SPECS</p>
-                                            <ul className="space-y-1 mb-4">
-                                                {analysis.features?.map((f, i) => (
-                                                    <li key={i} className="text-xs text-lime-600 dark:text-lime-neon flex items-center gap-2">
-                                                        <span className="w-1 h-1 rounded-full bg-lime-600 dark:bg-lime-neon"></span> {f}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                        <div className="flex items-center justify-between pt-4 border-t border-black/5 dark:border-white/10">
-                                            <span className="text-zinc-500 text-xs font-mono">{analysis.time} EST. TIME</span>
-                                            <button
-                                                onClick={() => onOpenChat && onOpenChat(analysis.recommendation)}
-                                                className="px-4 py-2 bg-lime-neon text-black text-xs font-bold uppercase tracking-widest rounded hover:bg-white transition-colors"
-                                            >
-                                                EXECUTE PLAN
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        {/* UTILITY CONSOLE - LUX INTERFACE */}
+        <div className="w-full max-w-2xl animate-reveal opacity-0 relative group mx-4" style={{ animationDelay: '0.6s' }}>
+            {/* Glow Effect behind input */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-spring-neon/20 via-electric-blue/20 to-spring-neon/20 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+            
+            <div className="glass-cinematic p-2 rounded-2xl flex flex-col gap-2 relative bg-white/70 dark:bg-onyx/80 backdrop-blur-2xl border border-black/5 dark:border-white/10 shadow-xl transition-colors duration-500">
+                
+                {/* Input Bar */}
+                <div className="flex flex-col md:flex-row items-center gap-2 px-4 py-3 bg-white/50 dark:bg-onyx/40 rounded-xl border border-black/5 dark:border-white/5 focus-within:border-spring-dim dark:focus-within:border-spring-neon/30 transition-all duration-500">
+                    <span className="text-spring-dim dark:text-spring-neon font-mono text-lg animate-pulse hidden md:block">{'>'}</span>
+                    <input 
+                        type="text" 
+                        value={projectInput}
+                        onChange={(e) => setProjectInput(e.target.value)}
+                        placeholder={text.input}
+                        className="w-full md:flex-1 bg-transparent border-none outline-none text-zinc-800 dark:text-zinc-100 text-sm md:text-base font-light placeholder-zinc-400 dark:placeholder-zinc-500 font-mono caret-spring-dim dark:caret-spring-neon tracking-wide text-center md:text-left"
+                        onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
+                    />
+                    <button 
+                        onClick={handleAnalyze}
+                        disabled={isAnalyzing}
+                        className="w-full md:w-auto px-6 py-3 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 text-[10px] font-bold uppercase rounded-lg hover:text-spring-dim dark:hover:text-spring-neon transition-all tracking-[0.2em] border border-black/5 dark:border-white/5 hover:border-spring-dim/20 dark:hover:border-spring-neon/20 active:scale-95 flex items-center justify-center gap-2 min-w-[140px]"
+                    >
+                        {isAnalyzing ? (
+                            <span className="flex gap-1">
+                                <span className="w-1 h-1 bg-spring-dim dark:bg-spring-neon rounded-full animate-bounce"></span>
+                                <span className="w-1 h-1 bg-spring-dim dark:bg-spring-neon rounded-full animate-bounce" style={{animationDelay:'0.1s'}}></span>
+                            </span>
+                        ) : (
+                            <span>{text.button}</span>
                         )}
-                    </div>
+                    </button>
                 </div>
+                
+                {/* STRATEGIC ROADMAP RESULT */}
+                {analysis && (
+                    <div className="mt-2 text-left p-0 rounded-xl bg-zinc-50 dark:bg-[#0A0A0B] border border-spring-dim/30 dark:border-spring-neon/30 relative overflow-hidden animate-reveal shadow-2xl">
+                         
+                         {/* Header Band */}
+                         <div className="bg-spring-neon/10 px-6 py-3 border-b border-spring-neon/10 flex justify-between items-center">
+                             <span className="text-[10px] font-mono uppercase tracking-widest text-spring-dim dark:text-spring-neon flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-spring-dim dark:bg-spring-neon animate-pulse"></span>
+                                {text.resultTitle}
+                             </span>
+                             <span className="text-[10px] font-mono text-zinc-500">{analysis.planMatch} Protocol</span>
+                         </div>
+
+                        <div className="p-6 relative z-10">
+                            {/* Briefing Section */}
+                            <div className="mb-6">
+                                <h3 className="text-zinc-900 dark:text-white text-lg font-medium mb-2">Briefing de Objetivo</h3>
+                                <p className="text-zinc-600 dark:text-zinc-400 text-sm font-light leading-relaxed border-l-2 border-spring-dim dark:border-spring-neon pl-4 italic">
+                                    "{analysis.briefing}"
+                                </p>
+                            </div>
+                            
+                            {/* Roadmap Steps */}
+                            <div className="space-y-3 mb-6">
+                                {analysis.roadmap?.map((step, i) => (
+                                    <div key={i} className="flex items-center gap-3">
+                                        <div className="w-6 h-6 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-[10px] font-mono font-bold text-zinc-500 border border-black/10 dark:border-white/10">
+                                            {i + 1}
+                                        </div>
+                                        <p className="text-sm text-zinc-800 dark:text-zinc-200">{step}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Action Footer */}
+                            <div className="flex items-center justify-between pt-4 border-t border-black/5 dark:border-white/10">
+                                <span className="text-zinc-500 text-xs font-mono">Status: READY TO DEPLOY</span>
+                                <button 
+                                    onClick={() => onOpenChat && onOpenChat(analysis.planMatch)}
+                                    className="px-5 py-2.5 bg-spring-dim dark:bg-spring-neon text-white dark:text-black text-xs font-bold uppercase tracking-widest rounded hover:bg-spring-neon dark:hover:bg-spring-dim transition-colors shadow-[0_0_15px_rgba(0,255,161,0.3)]"
+                                >
+                                    ACTIVAR {analysis.planMatch}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Hero;

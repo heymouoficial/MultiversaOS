@@ -4,383 +4,198 @@ export type Lang = 'es' | 'en';
 export const t = {
   es: {
     modal: {
-      title: "Identificación Requerida",
-      label: "¿Cómo debemos llamarte, viajero?",
+      title: "Bienvenido al Lobby",
+      label: "Soy Lux. Conecto negocios con Ecosistemas Vivos. Olvida las webs estáticas, hablemos de Empleados Digitales.",
       placeholder: "Tu nombre...",
-      button: "DESPLEGAR EN EL ECOSISTEMA"
+      button: "Ingresar al Lobby",
+      skip: "Solo estoy mirando / Incógnito"
     },
     hero: {
-      spots: "10 PLAZAS DISPONIBLES // NAVIDAD",
-      h1: "Tu presencia digital potenciada por nuestra Inteligencia Artificial",
-      h2: "",
-      p: "Creamos y Aceleramos tu negocio con IA. 10 Espacios exclusivos para desplegar Blueprints de alto impacto hoy mismo.",
-      powered: "Powered by Gemini Multimodal & Agency Core.",
+      spots: "10 CUPOS",
+      h1: "De Webs Aburridas a",
+      h2: "Ecosistemas Vivos.",
+      p: "Tus nuevos Empleados IA que 🟠 Atienden, 🟣 Filtran y 🟢 Venden por ti 24/7.",
+      powered: "Multiversa Intelligence • Agency",
       input: "Cuéntanos tu idea...",
-      button: "MATERIALIZAR VISIÓN",
-      analyzing: "CALIBRANDO AGENTES...",
-      manifesto: "Leer Manifiesto",
-      demo: "Demo Cuántico",
-      resultTitle: "BLUEPRINT ESTRATÉGICO"
+      button: "ANALIZAR",
+      analyzing: "DISEÑANDO ESTRATEGIA...",
+      manifesto: "Ver Casos",
+      demo: "Ver Demo",
+      resultTitle: "TU HOJA DE RUTA"
     },
     stack: {
-      title: "Arquitectura",
-      subtitle: "Stack Inteligente. Escala Global.",
-      desc1: "Agency Core",
-      desc2: "Data Holism",
-      desc3: "Edge Network",
-      desc4: "Neural Sync"
+      title: "Tu Fuerza Laboral",
+      subtitle: "No es código. Son activos digitales trabajando.",
+      desc1: "Atención 24/7",
+      desc2: "Memoria de Clientes",
+      desc3: "Velocidad Global",
+      desc4: "Cierre de Ventas"
     },
     pricing: {
-      title: "Niveles de Sincronización",
-      subtitle: "Elige tu vehículo de expansión",
-      freelancerQuote: "Lo esencial para vender profesionalmente.",
-      freelancerStack: ["Landing Page (5 Secciones Clave)", "Diseño High-Convert", "Hosting Incluido (1 año)", "Integración WhatsApp/Email", "Formulario de Contacto"],
-      pyme: "SmartWeb AI",
-      pymeQuote: "Tu web con cerebro propio.",
-      pymeStack: ["Todo lo de NanoWeb", "Núcleo Gemini Multimodal", "Chatbot Vendedor (Lee fotos/PDF)", "Análisis de visitantes básico", "Generación de Leads automática"],
-      enterprise: "Add-ons Mensuales",
-      enterpriseQuote: "Tranquilidad y contenido.",
-      customStack: ["Plan $10: Mantenimiento Técnico", "Plan $20: + Generación Contenido AI", "Actualizaciones de seguridad", "Soporte Prioritario", "Cancelación en cualquier momento"],
-      soon: "VER DETALLES",
-      specs: "Especificaciones",
-      row1: "Arquitectura",
-      row2: "Inteligencia",
-      row3: "Evolución",
-      row4: "Tiempo Materialización",
+      title: "Niveles de Ecosistema",
+      subtitle: "Escala tu facturación",
+      freelancer: "NanoWeb",
+      freelancerQuote: "Tu carta de presentación viva. Ideal para captar leads y agendar citas automáticamente mientras duermes.",
+      pyme: "SmartWeb",
+      pymeQuote: "El Ecosistema Completo. Empleados IA que responden WhatsApps, califican prospectos y cierran ventas en tu catálogo.",
+      enterprise: "Custom Web",
+      enterpriseQuote: "Automatización total de procesos. Integramos tu facturación, logística y CRM en un solo cerebro central.",
+      customStack: ["Automatización N8N", "CRM Integrado", "Dashboards IA", "Funnels de Venta", "Soporte Omnicanal", "Pagos Crypto/Fiat"],
+      soon: "COTIZAR",
+      specs: "Specs",
+      row1: "Capacidad",
+      row2: "Agentes IA",
+      row3: "Retorno",
+      row4: "Entrega",
       row4Nano: "< 6 Horas",
-      row4Smart: "< 36 Horas",
-      support: "Soporte Mensual",
-      supportDesc: "Mantenimiento, actualizaciones y soporte técnico 24/7.",
-      content: "Creación Contenido",
-      contentDesc: "Flujo automatizado de creación para 2 redes sociales.",
-      add: "Agregar"
+      row4Smart: "< 36 Horas"
     },
     workflow: {
-      title: "Nuestro Proceso",
-      subtitle: "Sprint Acelerado por IA",
-      step1Title: "Idear & Prototipar",
-      step1Desc: "Tus ideas traducidas a Blueprints técnicos en minutos, no semanas.",
-      step2Title: "Entrenar Agentes",
-      step2Desc: "Configuración de Lux o Gemini para alinearse a tu voz y ética.",
-      step3Title: "Despliegue Líquido",
-      step3Desc: "Lanzamiento inmediato en infraestructura Edge global.",
-      step4Title: "Escalar & Evolucionar",
-      step4Desc: " decisiones basadas en datos reales para crecimiento continuo."
+      title: "Metodología",
+      step1Title: "Diagnóstico",
+      step1Desc: "Entendemos qué vendes y dónde se pierden tus clientes.",
+      step2Title: "Estrategia",
+      step2Desc: "Diseñamos el flujo de tus Empleados Digitales.",
+      step3Title: "Despliegue",
+      step3Desc: "Activamos tu Ecosistema Vivo en servidores globales.",
+      step4Title: "Automatización",
+      step4Desc: "Tu negocio empieza a vender solo. Tú supervisas."
     },
     faq: {
-      title: "PREGUNTAS FRECUENTES",
-      questions: [
-        {
-          q: "¿Quiénes somos y qué es Multiversa Agency?",
-          a: "Somos una agencia de tecnología y consultoría holística parte del Multiverso. Nos enfocamos en materializar visiones utilizando IA para acelerar procesos que antes tomaban meses a solo horas."
-        },
-        {
-          q: "¿Qué significa Polimata?",
-          a: "Un Polimata es alguien con conocimientos profundos en múltiples disciplinas. En nuestro contexto, nuestros Agentes y equipo conectan puntos entre tecnología, negocios y filosofía para soluciones integrales."
-        },
-        {
-          q: "¿Qué es el Holismo en tecnología?",
-          a: "Es ver el todo. No solo entregamos código; entregamos un sistema vivo donde diseño, estrategia, datos y ética funcionan como un organismo unificado."
-        },
-        {
-          q: "¿Cómo la IA acelera el proceso?",
-          a: "Nuestros agentes están pre-entrenados para generar arquitectura, copy y estructuras de base. Lo que a un humano le toma semanas de 'carpintería', Gemini lo hace en minutos, permitiéndonos enfocarnos en la estrategia creativa."
-        },
-        {
-          q: "¿Qué es Lux?",
-          a: "Lux es nuestra agente de entrada (Lobby). Es honesta, educada y eficiente. Su rol principal es recibir visitantes, resolver dudas inmediatas y filtrar prospectos calificados para ti."
-        },
-        {
-          q: "¿Qué diferencia a una SmartWeb de una web normal?",
-          a: "Una web normal es estática. Una SmartWeb es multimodal y 'consciente'. Puede 'ver' (analizar imágenes), 'leer' (procesar documentos) y entender el contexto de tu negocio para actuar proactivamente."
-        },
-        {
-          q: "¿Qué pasa si quiero una Custom Web?",
-          a: "Perfecto. Te regalamos la consultoría inicial y el blueprint estratégico. Si decides hacerlo con nosotros, construimos sin 'candados' (Lock-In). Eres dueño absoluto de tu tecnología."
-        },
-        {
-          q: "¿Qué garantías de ética ofrecen?",
-          a: "La ética es nuestro pilar. Transparencia total en el uso de datos y en las capacidades de la IA. No vendemos humo; vendemos aceleración tecnológica tangible."
-        },
-        {
-          q: "¿Cuál es su plan a futuro?",
-          a: "Construir el 'Multiverso Digital', un ecosistema donde cada negocio tenga su propia 'parcela' de inteligencia autónoma interconectada, facilitando una economía colaborativa global."
-        },
-        {
-          q: "¿Mis datos son privados?",
-          a: "Absolutamente. Utilizamos Row Level Security en Supabase y estándares enterprise. Tu información y la de tus clientes es sagrada."
-        },
-        {
-          q: "¿Puedo migrar desde NanoWeb a SmartWeb?",
-          a: "Sí, es un upgrade natural. Al ser modular, simplemente 'encendemos' los módulos cognitivos adicionales cuando estés listo para escalar."
-        },
-        {
-          q: "¿Necesito saber programar?",
-          a: "En absoluto. Nosotros nos encargamos del código. Tú te encargas de la visión. Te entregamos un panel de control intuitivo."
-        },
-        {
-          q: "¿Cuánto tiempo tardan?",
-          a: "NanoWeb se despliega en < 6 horas tras el briefing. SmartWeb toma < 36 horas para calibración total de agentes."
-        },
-        {
-          q: "¿Soporte post-lanzamiento?",
-          a: "Sí, ofrecemos mantenimiento evolutivo. Tu web no se queda estancada; crece contigo."
-        },
-        {
-          q: "¿Cómo cobro a mis clientes?",
-          a: "Aceptamos Binance Pay, Pago Móvil y Zelle para transferencias. Integramos pasarelas de pago directamente en el flujo de conversación de los agentes."
-        }
-      ]
-    },
-    testimonials: {
-      title: "Equipo & Talentos",
-      subtitle: "Visionarios que ya están en el Multiverso",
-      t1: {
-        name: "Nico",
-        role: "NOPA Uruguay",
-        quote: "Consultoría Tecnológica e IA. Creamos un ETL Inteligente que permite recoger los datos de proveedores y transformarlos a su lógica de negocio.",
-        image: "/assets/team-nico.png"
-      },
-      t2: {
-        name: "Runa Gold",
-        role: "BioHacking Cuántico",
-        quote: "Branding y Diseño Holístico. Elevando la vibración visual de las marcas en el ecosistema.",
-        image: "/assets/team-runa.png"
-      },
-      t3: {
-        name: "Mario",
-        role: "Fungix",
-        quote: "Un caso de estudio para borrar sesgos sobre tecnología ancestral. Ecosistema educativo para potenciar memoria y atención con microdosis.",
-        image: "/assets/team-mario.png"
-      },
-      t4: {
-        name: "Carmelo Petti",
-        role: "Consultor de Negocios",
-        quote: "Estructuración de modelos de negocio escalables y visión estratégica para expansión internacional.",
-        image: "/assets/team-carmelo.png"
-      },
-      t5: {
-        name: "MouQ",
-        role: "Tecnología con Visión Holistica",
-        quote: "Arquitecto de Realidades Digitales. Fusionando código y consciencia para sistemas vivos.",
-        image: "/assets/team-mouq.png"
-      }
+      title: "Preguntas Frecuentes",
+      q1: "¿Qué es un Ecosistema Vivo?",
+      a1: "Una web que no espera sentada. Actúa, responde y busca clientes activamente.",
+      q2: "¿Los agentes atienden WhatsApp?",
+      a2: "Sí. SmartWeb incluye conexión directa a tu WhatsApp Business.",
+      q3: "¿Es difícil de administrar?",
+      a3: "No. Te entregamos un panel de control simple para ver tus ventas.",
+      q4: "¿Puedo empezar pequeño?",
+      a4: "NanoWeb es perfecto para validar tu oferta rápido.",
+      q5: "¿Necesito saber de tecnología?",
+      a5: "Cero. Nosotros somos tu departamento de tecnología externo.",
+      q6: "¿Se paga mensualidad?",
+      a6: "El pago es único por el desarrollo. El mantenimiento es mínimo.",
+      q7: "¿Qué pasa si quiero más funciones?",
+      a7: "Tu ecosistema es modular. Agregamos nuevos 'empleados' cuando quieras."
     },
     cta: {
-      title: "¿Listo para tu",
-      span: "Expansión Digital?",
+      title: "¿Listo para automatizar",
+      span: "Tus Ventas?",
       whatsapp: "Hablar con Lux"
     },
     dock: {
       home: "Lobby",
-      core: "Core",
+      core: "Activos",
       access: "Planes",
-      algo: "Proceso"
+      algo: "Método"
     },
     chat: {
-      inputPlaceholder: "Conversa con Multiversa AI...",
-      powered: "Multiversa Agency • Gemini Multimodal",
+      inputPlaceholder: "Pregúntale a Lux sobre automatización...",
+      powered: "Multiversa Host • Gemini 3.0",
       triggers: {
-        what: "¿Qué es Multiversa?",
-        options: "Ver Planes y Precios",
-        stack: "Diferencia Nano vs Smart",
-        pay: "Agendar Consultoría"
+        what: "¿Qué es un Ecosistema?",
+        options: "Ver Planes",
+        stack: "Cómo funciona",
+        pay: "Métodos de Pago"
       }
-    },
-    footer: {
-      copyright: "© 2025 Multiversa Group. Todos los derechos reservados.",
-      powered: "Powered By Gemini & Human Vision"
     }
   },
   en: {
     modal: {
-      title: "Identification Required",
-      label: "What shall we call you, traveler?",
+      title: "Welcome to the Lobby",
+      label: "I am Lux. I connect businesses with Living Ecosystems. Forget static websites, let's talk about Digital Employees.",
       placeholder: "Your name...",
-      button: "DEPLOY INTO ECOSYSTEM"
+      button: "Enter Lobby",
+      skip: "Just looking / Incognito"
     },
     hero: {
-      spots: "10 SPOTS AVAILABLE // CHRISTMAS",
-      h1: "Your Digital Presence powered by our Artificial Intelligence",
-      h2: "",
-      p: "We create and accelerate your business with AI. 10 Exclusive spots to deploy high-impact Blueprints today.",
-      powered: "Powered by Gemini Multimodal & Agency Core.",
-      input: "Tell us, what vision do you want to materialize?",
-      button: "MATERIALIZE VISION",
-      analyzing: "CALIBRATING AGENTS...",
-      manifesto: "Read Manifesto",
-      demo: "Quantum Demo",
-      resultTitle: "STRATEGIC BLUEPRINT"
+      spots: "10 SPOTS",
+      h1: "From Boring Webs to",
+      h2: "Living Ecosystems.",
+      p: "Your new AI Employees that 🟠 Attend, 🟣 Filter and 🟢 Sell for you 24/7.",
+      powered: "Multiversa Intelligence • Agency",
+      input: "Tell us your idea...",
+      button: "ANALYZE",
+      analyzing: "DESIGNING STRATEGY...",
+      manifesto: "View Cases",
+      demo: "View Demo",
+      resultTitle: "YOUR ROADMAP"
     },
     stack: {
-      title: "Architecture",
-      subtitle: "Intelligent Stack. Global Scale.",
-      desc1: "Agency Core",
-      desc2: "Data Holism",
-      desc3: "Edge Network",
-      desc4: "Neural Sync"
+      title: "Your Workforce",
+      subtitle: "It's not code. It's digital assets working.",
+      desc1: "24/7 Attention",
+      desc2: "Client Memory",
+      desc3: "Global Speed",
+      desc4: "Sales Closing"
     },
     pricing: {
-      title: "Synchronization Levels",
-      subtitle: "Choose your expansion vehicle",
+      title: "Ecosystem Levels",
+      subtitle: "Scale your revenue",
       freelancer: "NanoWeb",
-      freelancerQuote: "The winning structure of a landing page. Includes Lux in the Lobby: honest, helpful, and polite, capable of filtering and prospecting visitors while you sleep.",
-      freelancerStack: ["Optimized Landing", "Lux Chatbot (Prospector)", "Vercel Hosting", "Premium Design"],
+      freelancerQuote: "Your living cover letter. Ideal for capturing leads and scheduling appointments automatically while you sleep.",
       pyme: "SmartWeb",
-      pymeQuote: "The multimodal core. A living Web that analyzes, investigates, and evolves. It's an active system that studies the competition and adjusts strategy in real-time.",
-      pymeStack: ["Multimodal Core", "Next.js + Supabase", "Competitor Analysis", "Total Automation"],
+      pymeQuote: "The Full Ecosystem. AI Employees that answer WhatsApps, qualify leads, and close sales in your catalog.",
       enterprise: "Custom Web",
-      enterpriseQuote: "Free initial consulting. You take the blueprint and a masterclass. If you decide to stay, we configure everything custom without Lock-In and infinite scalability.",
-      customStack: ["Custom SmartApps", "Strategic Consulting", "No Vendor Lock-in", "Full Blueprint"],
-      soon: "GET QUOTE NOW",
-      specs: "Specifications",
-      row1: "Architecture",
-      row2: "Intelligence",
-      row3: "Evolution",
-      row4: "Materialization Time",
+      enterpriseQuote: "Total process automation. We integrate your billing, logistics, and CRM into a single central brain.",
+      customStack: ["N8N Automation", "Integrated CRM", "AI Dashboards", "Sales Funnels", "Omnichannel Support", "Crypto/Fiat Payments"],
+      soon: "GET QUOTE",
+      specs: "Specs",
+      row1: "Capacity",
+      row2: "AI Agents",
+      row3: "Return",
+      row4: "Delivery",
       row4Nano: "< 6 Hours",
-      row4Smart: "< 36 Hours",
-      support: "Monthly Support",
-      supportDesc: "Maintenance, updates, and 24/7 technical support.",
-      content: "Content Creation",
-      contentDesc: "Automated creation flow for 2 social networks.",
-      add: "Add"
+      row4Smart: "< 36 Hours"
     },
     workflow: {
-      title: "Our Process",
-      subtitle: "AI Accelerated Sprint",
-      step1Title: "Ideate & Prototype",
-      step1Desc: "Your ideas translated into technical Blueprints in minutes, not weeks.",
-      step2Title: "Train Agents",
-      step2Desc: "Configuring Lux or Gemini to align with your voice and ethics.",
-      step3Title: "Liquid Deployment",
-      step3Desc: "Immediate launch on global Edge infrastructure.",
-      step4Title: "Scale & Evolve",
-      step4Desc: "Data-driven decisions for continuous growth."
+      title: "Methodology",
+      step1Title: "Diagnosis",
+      step1Desc: "We understand what you sell and where you lose clients.",
+      step2Title: "Strategy",
+      step2Desc: "We design the flow of your Digital Employees.",
+      step3Title: "Deployment",
+      step3Desc: "We activate your Living Ecosystem on global servers.",
+      step4Title: "Automation",
+      step4Desc: "Your business starts selling alone. You supervise."
     },
     faq: {
-      title: "FREQUENTLY ASKED QUESTIONS",
-      questions: [
-        {
-          q: "Who are we and what is Multiversa Agency?",
-          a: "We are a technology and holistic consulting agency part of the Multiverse. We focus on materializing visions using AI to accelerate processes from months to hours."
-        },
-        {
-          q: "What does Polymath mean?",
-          a: "A Polymath is someone with deep knowledge in multiple disciplines. In our context, our Agents and team connect dots between technology, business, and philosophy for integral solutions."
-        },
-        {
-          q: "What is Holism in technology?",
-          a: "It's seeing the whole. We don't just deliver code; we deliver a living system where design, strategy, data, and ethics function as a unified organism."
-        },
-        {
-          q: "How does AI accelerate the process?",
-          a: "Our agents are pre-trained to generate architecture, copy, and base structures. What takes a human weeks of 'carpentry', Gemini does in minutes, allowing us to focus on creative strategy."
-        },
-        {
-          q: "Who is Lux?",
-          a: "Lux is our entry agent (Lobby). She is honest, polite, and efficient. Her main role is to welcome visitors, resolve immediate doubts, and filter qualified prospects for you."
-        },
-        {
-          q: "Difference between SmartWeb and normal web?",
-          a: "A normal web is static. A SmartWeb is multimodal and 'conscious'. It can 'see' (analyze images), 'read' (process documents), and understand your business context to act proactively."
-        },
-        {
-          q: "What if I want a Custom Web?",
-          a: "Perfect. We gift you the initial consulting and strategic blueprint. If you decide to build with us, we build without Lock-In. You are the absolute owner of your technology."
-        },
-        {
-          q: "What ethical guarantees do you offer?",
-          a: "Ethics is our pillar. Total transparency in data usage and AI capabilities. We don't sell smoke; we sell tangible technological acceleration."
-        },
-        {
-          q: "What is your future plan?",
-          a: "To build the 'Digital Multiverse', an ecosystem where every business has its own 'plot' of interconnected autonomous intelligence, facilitating a global collaborative economy."
-        },
-        {
-          q: "Is my data private?",
-          a: "Absolutely. We use Row Level Security in Supabase and enterprise standards. Your information and your clients' is sacred."
-        },
-        {
-          q: "Can I migrate from NanoWeb to SmartWeb?",
-          a: "Yes, it's a natural upgrade. Being modular, we simply 'turn on' the additional cognitive modules when you are ready to scale."
-        },
-        {
-          q: "Do I need to know how to code?",
-          a: "Not at all. We handle the code. You handle the vision. We deliver an intuitive control panel."
-        },
-        {
-          q: "How long does it take?",
-          a: "NanoWeb deploys in < 6 hours after briefing. SmartWeb takes < 36 hours for full agent calibration."
-        },
-        {
-          q: "Post-launch support?",
-          a: "Yes, we offer evolutionary maintenance. Your web doesn't stay stagnant; it grows with you."
-        },
-        {
-          q: "How do I charge my clients?",
-          a: "We integrate payment gateways (Stripe, PayPal, Crypto) directly into the agent conversation flow if required."
-        }
-      ]
-    },
-    testimonials: {
-      title: "Team & Talents",
-      subtitle: "Visionaries already in the Multiverse",
-      t1: {
-        name: "Nico",
-        role: "NOPA Uruguay",
-        quote: "Tech & AI Consulting. We created an Intelligent ETL to gather supplier data and transform it into their business logic.",
-        image: "/assets/team-nico.png"
-      },
-      t2: {
-        name: "Runa Gold",
-        role: "Quantum BioHacking",
-        quote: "Branding and Holistic Design. Elevating the visual vibration of brands in the ecosystem.",
-        image: "/assets/team-runa.png"
-      },
-      t3: {
-        name: "Mario",
-        role: "Fungix",
-        quote: "Case study to erase bias on ancestral technology. Educational ecosystem to boost memory and focus with microdosing.",
-        image: "/assets/team-mario.png"
-      },
-      t4: {
-        name: "Carmelo Petti",
-        role: "Business Consultant",
-        quote: "Structuring scalable business models and strategic vision for international expansion.",
-        image: "/assets/team-carmelo.png"
-      },
-      t5: {
-        name: "MouQ",
-        role: "Tech with Holistic Vision",
-        quote: "Architect of Digital Realities. Merging code and consciousness for living systems.",
-        image: "/assets/team-mouq.png"
-      }
+      title: "Frequently Asked Questions",
+      q1: "What is a Living Ecosystem?",
+      a1: "A web that doesn't sit still. It acts, responds, and actively seeks clients.",
+      q2: "Do agents handle WhatsApp?",
+      a2: "Yes. SmartWeb includes direct connection to your WhatsApp Business.",
+      q3: "Is it hard to manage?",
+      a3: "No. We give you a simple control panel to see your sales.",
+      q4: "Can I start small?",
+      a4: "NanoWeb is perfect for validating your offer quickly.",
+      q5: "Do I need tech skills?",
+      a5: "Zero. We are your external technology department.",
+      q6: "Is there a monthly fee?",
+      a6: "Payment is one-time for development. Maintenance is minimal.",
+      q7: "What if I want more features?",
+      a7: "Your ecosystem is modular. We add new 'employees' whenever you want."
     },
     cta: {
-      title: "Ready for your",
-      span: "Digital Expansion?",
-      whatsapp: "Talk to Lux"
+      title: "Ready to automate",
+      span: "Your Sales?",
+      whatsapp: "Chat with Lux"
     },
     dock: {
       home: "Lobby",
-      core: "Core",
+      core: "Assets",
       access: "Plans",
-      algo: "Process"
+      algo: "Method"
     },
     chat: {
-      inputPlaceholder: "Chat with Multiversa AI...",
-      powered: "Multiversa Agency • Gemini Multimodal",
+      inputPlaceholder: "Ask Lux about automation...",
+      powered: "Multiversa Host • Gemini 3.0",
       triggers: {
-        what: "What is Multiversa?",
-        options: "View Plans & Pricing",
-        stack: "Nano vs Smart Diff",
-        pay: "Book Consulting"
+        what: "What is an Ecosystem?",
+        options: "View Plans",
+        stack: "How it works",
+        pay: "Payment Methods"
       }
-    },
-    footer: {
-      copyright: "© 2025 Multiversa Group. All rights reserved.",
-      powered: "Powered By Gemini & Human Vision"
     }
   }
 };
