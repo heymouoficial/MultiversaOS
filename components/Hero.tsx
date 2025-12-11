@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { analyzeProjectNeeds } from '../services/gemini';
 import { Lang } from '../utils/translations';
 
@@ -13,17 +14,24 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
   const [projectInput, setProjectInput] = useState('');
-  const [analysis, setAnalysis] = useState<{ briefing: string; roadmap: string[]; planMatch: string } | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const handleAnalyze = async () => {
+  // TanStack Query Mutation for Project Analysis
+  const analysisMutation = useMutation({
+    mutationFn: async (input: string) => {
+      return await analyzeProjectNeeds(input, lang, userName);
+    },
+    onError: (error) => {
+      console.error("Analysis Failed", error);
+    }
+  });
+
+  const handleAnalyze = () => {
     if (!projectInput.trim()) return;
-    setIsAnalyzing(true);
-    setAnalysis(null);
-    const result = await analyzeProjectNeeds(projectInput, lang, userName);
-    setAnalysis(result);
-    setIsAnalyzing(false);
+    analysisMutation.mutate(projectInput);
   };
+
+  const analysis = analysisMutation.data;
+  const isAnalyzing = analysisMutation.isPending;
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden px-4 perspective-1000">
@@ -107,7 +115,7 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
                             
                             {/* Roadmap Steps */}
                             <div className="space-y-3 mb-6">
-                                {analysis.roadmap?.map((step, i) => (
+                                {analysis.roadmap?.map((step: string, i: number) => (
                                     <div key={i} className="flex items-center gap-3">
                                         <div className="w-6 h-6 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-[10px] font-mono font-bold text-zinc-500 border border-black/10 dark:border-white/10">
                                             {i + 1}

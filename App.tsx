@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Hero from './components/Hero';
+import ProblemSolution from './components/ProblemSolution';
 import Pricing from './components/Pricing';
 import Workflow from './components/Workflow';
 import TechStack from './components/TechStack';
@@ -84,6 +85,7 @@ const App: React.FC = () => {
   // Helper for dynamic section names in Rail
   const sectionNames: Record<string, string> = {
       home: text.dock.home,
+      reality: text.dock.reality,
       stack: text.dock.core,
       pricing: text.dock.access,
       workflow: text.dock.algo,
@@ -139,7 +141,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden ${isDark ? 'bg-onyx text-zinc-100' : 'bg-snow text-zinc-900'} transition-colors duration-500 selection:bg-spring-neon/30`}>
+    <div className={`relative w-full h-screen overflow-hidden bg-onyx text-zinc-100 transition-colors duration-500 selection:bg-spring-neon/30`}>
       
       {/* --- VISION OS WELCOME MODAL --- */}
       {showWelcomeModal && (
@@ -192,7 +194,7 @@ const App: React.FC = () => {
 
       {/* --- NAVIGATION RAIL (USER JOURNEY) --- */}
       <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-4 items-center">
-          {['home', 'stack', 'pricing', 'workflow', 'final'].map((id) => (
+          {['home', 'reality', 'stack', 'pricing', 'workflow', 'final'].map((id) => (
               <button
                 key={id}
                 onClick={() => scrollToSection(id)}
@@ -204,26 +206,15 @@ const App: React.FC = () => {
 
       {/* --- BACKGROUND (ONYX & SPRING) --- */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-onyx">
-          {isDark ? (
-            <>
-              {/* Onyx Base with deep gradients */}
-              <div className="absolute inset-0 bg-gradient-to-b from-onyx via-[#111] to-[#050505]"></div>
-              
-              {/* Spring & Electric Orbs - Updated Palette */}
-              <div className="absolute top-[10%] left-[20%] w-[50vw] h-[50vh] bg-spring-neon/5 blur-[150px] rounded-full animate-float"></div>
-              <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vh] bg-electric-blue/5 blur-[130px] rounded-full animate-float-delayed"></div>
-              
-              {/* Noise Texture */}
-              <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
-            </>
-          ) : (
-             <>
-                {/* Bright Snow Mode */}
-                <div className="absolute top-[30%] left-[20%] w-[60vw] h-[60vh] bg-spring-neon/10 blur-[120px] rounded-full animate-pulse-slow mix-blend-multiply opacity-50"></div>
-                <div className="absolute bottom-[10%] right-[10%] w-[40vw] h-[40vw] bg-electric-blue/10 blur-[100px] rounded-full mix-blend-multiply animate-float opacity-50"></div>
-                <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:20px_20px]"></div>
-             </>
-          )}
+          {/* Onyx Base with deep gradients */}
+          <div className="absolute inset-0 bg-gradient-to-b from-onyx via-[#111] to-[#050505]"></div>
+          
+          {/* Spring & Electric Orbs - Updated Palette */}
+          <div className="absolute top-[10%] left-[20%] w-[50vw] h-[50vh] bg-spring-neon/5 blur-[150px] rounded-full animate-float"></div>
+          <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vh] bg-electric-blue/5 blur-[130px] rounded-full animate-float-delayed"></div>
+          
+          {/* Noise Texture */}
+          <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
       </div>
 
       {/* --- LEFT DOCK (HEADER) --- */}
@@ -244,30 +235,20 @@ const App: React.FC = () => {
 
             <nav className="hidden md:flex gap-2">
                 <NavButton targetId="home" label={text.dock.home} />
+                <NavButton targetId="reality" label={text.dock.reality} />
                 <NavButton targetId="stack" label={text.dock.core} />
                 <NavButton targetId="pricing" label={text.dock.access} />
                 <NavButton targetId="workflow" label={text.dock.algo} />
             </nav>
         </header>
 
-        {/* Controls (Lang + Theme) */}
+        {/* Controls (Lang) */}
         <div className="flex gap-2">
            <button 
               onClick={toggleLang} 
               className="header-dock h-14 rounded-2xl px-4 text-[10px] font-mono font-bold text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-spring-dim dark:hover:border-spring-neon/50 transition-all uppercase flex items-center gap-2 group"
            >
               <span className="text-spring-text dark:text-spring-neon group-hover:shadow-[0_0_10px_currentColor] transition-shadow">LAN</span> {lang}
-           </button>
-
-           <button 
-              onClick={toggleTheme}
-              className="header-dock w-14 h-14 rounded-2xl flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-electric-blue dark:hover:text-electric-blue border border-black/5 dark:border-white/10 hover:border-electric-blue dark:hover:border-electric-blue/50 transition-all group"
-           >
-              {isDark ? (
-                  <svg className="w-5 h-5 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-              ) : (
-                  <svg className="w-5 h-5 group-hover:-rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-              )}
            </button>
         </div>
       </div>
@@ -292,6 +273,10 @@ const App: React.FC = () => {
             <Hero lang={lang} text={text.hero} onOpenChat={handleOpenChat} userName={userName} />
         </section>
 
+        <section id="reality" ref={(el) => { if(el) sectionRefs.current['reality'] = el; }} className="snap-section">
+            <ProblemSolution lang={lang} text={text.reality} />
+        </section>
+
         <section id="stack" ref={(el) => { if(el) sectionRefs.current['stack'] = el; }} className="snap-section">
             <TechStack lang={lang} text={text.stack} />
         </section>
@@ -307,8 +292,16 @@ const App: React.FC = () => {
         <section id="final" ref={(el) => { if(el) sectionRefs.current['final'] = el; }} className="snap-section justify-start pt-20 overflow-y-auto">
             <FAQ lang={lang} text={text.faq} />
             <FinalCTA lang={lang} text={text.cta} onAction={() => handleOpenChat('Final Interest')} />
-            <div className="w-full py-6 text-center text-[10px] text-zinc-500 dark:text-zinc-600 font-mono tracking-widest border-t border-black/5 dark:border-white/5 bg-white/40 dark:bg-onyx/40 backdrop-blur-md">
-                MULTIVERSA OS [BETA] • 2024
+            
+            {/* FOOTER & SAFE CREATIVE BADGE */}
+            <div className="w-full py-8 border-t border-black/5 dark:border-white/5 bg-white/40 dark:bg-onyx/40 backdrop-blur-md flex flex-col items-center justify-center gap-2">
+                <div className="text-[10px] text-zinc-500 dark:text-zinc-600 font-mono tracking-widest">
+                   MULTIVERSA OS [BETA] • 2024
+                </div>
+                <div className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-help" title="Digital Fingerprint Protected">
+                    <svg className="w-3 h-3 text-spring-dim" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span className="text-[9px] text-zinc-600 font-mono uppercase tracking-wider">Protected by SafeCreative</span>
+                </div>
             </div>
         </section>
       </main>
