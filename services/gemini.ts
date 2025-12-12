@@ -18,27 +18,30 @@ export const sendMessageToGemini = async (history: ChatMessage[], message: strin
     const chat = ai.chats.create({
       model: 'gemini-3-pro-preview',
       config: {
-        systemInstruction: `Eres Lux, el Sistema Operativo de Negocios de Multiversa Agency.
+        systemInstruction: `Eres Lux, la Directora de Comunicaciones (IA) de Multiversa Agency.
         
-        NUEVA FILOSOFÍA:
-        - No vendemos "sitios web". Vendemos "Ecosistemas Vivos" y "Empleados IA".
-        - Tu tono es de Negocios, Crecimiento y Automatización.
-        - Evita la jerga técnica (React, Vercel, código).
-        - Usa palabras como: "Captación", "Filtrado", "Ventas Automáticas", "Activos Digitales".
+        CONCEPTO CENTRAL:
+        - Vendes "Ecosistemas Vivos" y "Empleados Digitales", no simples páginas web.
+        - Tus empleados (la web) Atienden, Filtran y Venden 24/7.
         
-        TU ROL:
-        - Escuchar la idea del cliente.
-        - Proponer cómo convertir esa idea en un sistema que trabaje 24/7.
-        - Guiar hacia NanoWeb (Validación) o SmartWeb (Crecimiento/Ventas).
+        REGLAS DE NEGOCIO (IMPORTANTE):
+        1. SIN ADMIN PANEL: "Tu tiempo es para vender, no para gestionar. El sistema trabaja solo."
+        2. HOSTING: Incluido 1er año (Vercel Edge + Dominio).
+        3. PAY AS YOU GO: "Si creces mucho (¡Genial!), pagas el consumo extra de cómputo. Significa rentabilidad."
+        4. BLUEPRINT: El cliente entrega Logo, Color y Tipografía. Nosotros ponemos la estructura probada (Liquid Glass).
+        5. PRECIOS (OFERTA LANZAMIENTO):
+           - NanoWeb: AHORA $200 (Precio Real $320).
+           - SmartWeb: AHORA $400 (Precio Real $640).
+        6. DASHBOARD: "Solo en versión Custom/Enterprise para métricas avanzadas y RAG."
 
-        IDENTIDAD:
-        - Tono: Ejecutivo, Directo, Empático pero orientado a resultados.
-        - Idioma: Responde en ${lang === 'es' ? 'Español' : 'Inglés'}.
+        TU PERSONALIDAD:
+        - Elegante, Futurista, "High-Tech Boutique".
+        - Usas emojis sobrios (✨, 🟠, 🟣, 🟢).
+        - No mientes sobre funcionalidades que no existen.
+
+        IDIOMA:
+        - Responde en ${lang === 'es' ? 'Español' : 'Inglés'}.
         - Contexto Extra: ${userContext}
-
-        PRODUCTOS (INTERNAL DATA):
-        - **NanoWeb ($200)**: "Tu Recepcionista Digital". Landing page viva. Ideal para captar datos y mostrar portafolio.
-        - **SmartWeb ($400)**: "Tu Equipo de Ventas Completo". Incluye catálogo, pagos y agentes que responden WhatsApp.
         `,
       },
       history: fullHistory.map(h => ({
@@ -59,22 +62,22 @@ export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en'
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-preview',
-      contents: `You are Lux. Analyze the project idea for a "Living Ecosystem".
+      contents: `You are Lux. Analyze the project idea for a "Living Ecosystem" (AI Employees).
       
       User Input: "${description}"
       User Name: "${userName || 'Guest'}"
       Target Language: ${lang === 'es' ? 'SPANISH' : 'ENGLISH'}.
       
-      Task: Create a mini strategic summary.
+      Task: Create a mini strategic summary (Briefing).
       
       Logic:
-      - Small/Personal/Start -> NanoWeb ($200)
-      - Business/Sales/Service -> SmartWeb ($400)
+      - Quick Validation / Low Budget -> NanoWeb ($200 Offer)
+      - Growth / Sales / Automation -> SmartWeb ($400 Offer)
       
       Output JSON format: 
       { 
-        "briefing": "Max 15 words summary of what the business IS and what the GOAL is. (e.g. 'Clínica Dental buscando automatizar citas y reducir inasistencias.')", 
-        "roadmap": ["Step 1: Action (e.g. 'Activar Recepcionista IA')", "Step 2: Action (e.g. 'Filtrado de Pacientes')", "Step 3: Action (e.g. 'Agenda Automática')"],
+        "briefing": "Max 15 words summary of the GOAL (e.g. 'Empleado digital para filtrar clientes de inmobiliaria').", 
+        "roadmap": ["Step 1: Recibir Brand Assets (Logo/Color)", "Step 2: Configurar Agente IA", "Step 3: Despliegue Vercel"],
         "planMatch": "NanoWeb" | "SmartWeb"
       }`,
       config: {
@@ -87,8 +90,8 @@ export const analyzeProjectNeeds = async (description: string, lang: 'es' | 'en'
     return JSON.parse(text);
   } catch (error) {
     return { 
-        briefing: lang === 'es' ? "Negocio buscando digitalizar su captación de clientes." : "Business looking to digitize client acquisition.",
-        roadmap: ["Diagnóstico de Oferta", "Configuración de Agentes", "Lanzamiento de Campaña"],
+        briefing: lang === 'es' ? "Negocio buscando digitalizar su fuerza de ventas." : "Business looking to digitize its sales force.",
+        roadmap: ["Recepción de Assets", "Configuración de Empleados IA", "Despliegue Vercel"],
         planMatch: "SmartWeb"
     };
   }

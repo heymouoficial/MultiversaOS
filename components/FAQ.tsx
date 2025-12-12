@@ -17,7 +17,8 @@ const FAQ: React.FC<FAQProps> = ({ text }) => {
     { q: text.q4, a: text.a4 },
     { q: text.q5, a: text.a5 },
     { q: text.q6, a: text.a6 },
-    { q: text.q7, a: text.a7 }
+    { q: text.q7, a: text.a7 },
+    { q: text.q8, a: text.a8 } // Added Q8 for Tech Stack
   ];
 
   return (

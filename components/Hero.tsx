@@ -39,10 +39,10 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
       {/* --- ATMOSPHERE LAYERS --- */}
       <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] bg-gradient-radial from-spring-neon/10 via-transparent to-transparent opacity-60 pointer-events-none mix-blend-screen blur-3xl dark:opacity-40 opacity-30"></div>
       
-      <div className="z-10 max-w-[90vw] md:max-w-7xl mx-auto flex flex-col items-center text-center relative">
+      <div className="z-10 max-w-[90vw] md:max-w-7xl mx-auto flex flex-col items-center text-center relative pt-20 md:pt-32">
         
         {/* Main Title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight mb-8 leading-[1.1] text-zinc-900 dark:text-white animate-reveal opacity-0 select-none drop-shadow-2xl text-balance mt-10 md:mt-0 transition-colors duration-500" style={{ animationDelay: '0.2s' }}>
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight mb-8 leading-[1.1] text-zinc-900 dark:text-white animate-reveal opacity-0 select-none drop-shadow-2xl text-balance transition-colors duration-500" style={{ animationDelay: '0.2s' }}>
           {text.h1} <br className="hidden md:block" />
           <span className="text-grad-multiversa italic font-light relative inline-block">
              {text.h2}
@@ -107,7 +107,7 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
                         <div className="p-6 relative z-10">
                             {/* Briefing Section */}
                             <div className="mb-6">
-                                <h3 className="text-zinc-900 dark:text-white text-lg font-medium mb-2">Briefing de Objetivo</h3>
+                                <h3 className="text-zinc-900 dark:text-white text-lg font-medium mb-2">{text.briefingLabel}</h3>
                                 <p className="text-zinc-600 dark:text-zinc-400 text-sm font-light leading-relaxed border-l-2 border-spring-dim dark:border-spring-neon pl-4 italic">
                                     "{analysis.briefing}"
                                 </p>
@@ -127,12 +127,12 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
 
                             {/* Action Footer */}
                             <div className="flex items-center justify-between pt-4 border-t border-black/5 dark:border-white/10">
-                                <span className="text-zinc-500 text-xs font-mono">Status: READY TO DEPLOY</span>
+                                <span className="text-zinc-500 text-xs font-mono">{text.statusLabel}</span>
                                 <button 
                                     onClick={() => onOpenChat && onOpenChat(analysis.planMatch)}
                                     className="px-5 py-2.5 bg-spring-dim dark:bg-spring-neon text-white dark:text-black text-xs font-bold uppercase tracking-widest rounded hover:bg-spring-neon dark:hover:bg-spring-dim transition-colors shadow-[0_0_15px_rgba(0,255,161,0.3)]"
                                 >
-                                    ACTIVAR {analysis.planMatch}
+                                    {text.activateBtn} {analysis.planMatch}
                                 </button>
                             </div>
                         </div>

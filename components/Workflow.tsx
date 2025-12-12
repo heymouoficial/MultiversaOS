@@ -24,9 +24,9 @@ const Workflow: React.FC<WorkflowProps> = ({ text }) => {
          <div className="text-center mb-16 md:mb-24">
              <div className="flex items-center justify-center gap-2 mb-3">
                  <span className="w-2 h-2 rounded-full bg-spring-neon animate-pulse"></span>
-                 <h2 className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Process Automation</h2>
+                 <h2 className="text-xs font-mono text-zinc-500 tracking-widest uppercase">{text.tag}</h2>
              </div>
-             <h3 className="text-3xl md:text-5xl font-light text-white tracking-tight">System Workflow</h3>
+             <h3 className="text-3xl md:text-5xl font-light text-white tracking-tight">{text.header}</h3>
          </div>
 
          {/* n8n Style Pipeline - Responsive Layout */}
@@ -89,7 +89,7 @@ const Workflow: React.FC<WorkflowProps> = ({ text }) => {
          {/* Bottom Label */}
          <div className="mt-16 text-center">
             <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-mono text-zinc-500">
-                ● Executing Pipeline...
+                ● {text.executing}
             </span>
          </div>
 
