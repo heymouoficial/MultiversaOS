@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { analyzeProjectNeeds } from '../services/gemini';
 import { Lang } from '../utils/translations';
+import { HeroPill } from './ui/hero-pill';
 
 interface HeroProps {
     lang: Lang;
@@ -41,8 +42,18 @@ const Hero: React.FC<HeroProps> = ({ lang, text, onOpenChat, userName }) => {
       
       <div className="z-10 max-w-[90vw] md:max-w-7xl mx-auto flex flex-col items-center text-center relative pt-20 md:pt-32">
         
-        {/* Main Title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight mb-8 leading-[1.1] text-zinc-900 dark:text-white animate-reveal opacity-0 select-none drop-shadow-2xl text-balance transition-colors duration-500" style={{ animationDelay: '0.2s' }}>
+        {/* HERO PILL ANNOUNCEMENT */}
+        <div className="mb-8 animate-reveal" style={{ animationDelay: '0.1s' }}>
+          <HeroPill 
+            href="#pricing"
+            label={text.spots}
+            announcement="BETA"
+            className="bg-spring-neon/10 ring-spring-neon/50 [&_div]:bg-spring-neon [&_div]:text-black [&_p]:text-spring-neon [&_svg_path]:fill-[#00FFA1] hover:bg-spring-neon/20 transition-colors"
+          />
+        </div>
+
+        {/* Main Title - Reduced Size */}
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight mb-8 leading-[1.1] text-zinc-900 dark:text-white animate-reveal opacity-0 select-none drop-shadow-2xl text-balance transition-colors duration-500" style={{ animationDelay: '0.2s' }}>
           {text.h1} <br className="hidden md:block" />
           <span className="text-grad-multiversa italic font-light relative inline-block">
              {text.h2}

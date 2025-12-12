@@ -16,9 +16,10 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ text, onAction }) => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-spring-neon/5 blur-[120px] pointer-events-none rounded-full"></div>
 
         <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-7xl font-normal text-zinc-900 dark:text-white mb-12 tracking-tighter leading-none transition-colors duration-500">
+            <h2 className="text-5xl md:text-7xl font-normal text-zinc-900 dark:text-white mb-12 tracking-tighter leading-tight transition-colors duration-500">
                 {text.title} <br/>
-                <span className="text-grad-multiversa font-light italic">{text.span}</span>
+                {/* Added py-4 and pr-4 to accommodate italic descenders and the trailing question mark */}
+                <span className="text-grad-multiversa font-light italic inline-block py-4 pr-4">{text.span}</span>
             </h2>
             
             <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">

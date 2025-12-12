@@ -8,6 +8,8 @@ import TechStack from './components/TechStack';
 import FinalCTA from './components/FinalCTA';
 import ChatBot from './components/ChatBot';
 import FAQ from './components/FAQ';
+import Aurora from './components/Aurora';
+import { DottedSurface } from './components/ui/dotted-surface';
 import { t, Lang } from './utils/translations';
 
 const App: React.FC = () => {
@@ -204,11 +206,26 @@ const App: React.FC = () => {
           ))}
       </div>
 
-      {/* --- BACKGROUND (ONYX & SPRING) --- */}
+      {/* --- BACKGROUND (ONYX & SPRING & DOTTED WAVE) --- */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-onyx">
           {/* Onyx Base with deep gradients */}
           <div className="absolute inset-0 bg-gradient-to-b from-onyx via-[#111] to-[#050505]"></div>
           
+          {/* DOTTED SURFACE LAYER - BEHIND AURORA */}
+          <div className="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
+              <DottedSurface theme={isDark ? 'dark' : 'light'} className="w-full h-full" />
+          </div>
+
+          {/* AURORA LAYER - TOP BACKGROUND */}
+          <div className="absolute top-0 left-0 w-full h-[60vh] opacity-40 mix-blend-screen z-0">
+               <Aurora
+                  colorStops={["#00FFA1", "#00E6FF", "#151515"]} // Modified to match Multiversa Brand (Spring Neon -> Electric Blue -> Onyx)
+                  blend={0.6}
+                  amplitude={0.8}
+                  speed={0.3}
+               />
+          </div>
+
           {/* Spring & Electric Orbs - Updated Palette */}
           <div className="absolute top-[10%] left-[20%] w-[50vw] h-[50vh] bg-spring-neon/5 blur-[150px] rounded-full animate-float"></div>
           <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vh] bg-electric-blue/5 blur-[130px] rounded-full animate-float-delayed"></div>
@@ -246,24 +263,11 @@ const App: React.FC = () => {
         <div className="flex gap-2">
            <button 
               onClick={toggleLang} 
-              className="header-dock h-14 rounded-2xl px-4 text-[10px] font-mono font-bold text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-spring-dim dark:hover:border-spring-neon/50 transition-all uppercase flex items-center gap-2 group"
+              className="header-dock h-14 rounded-2xl px-4 text-[10px] font-mono font-bold text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/10 hover:border-spring-dim dark:hover:border-spring-neon/50 transition-all uppercase flex items-center gap-2 group hover:bg-white/5"
            >
-              <span className="text-spring-text dark:text-spring-neon group-hover:shadow-[0_0_10px_currentColor] transition-shadow">LAN</span> {lang}
+              <span className="text-spring-text dark:text-spring-neon group-hover:drop-shadow-[0_0_8px_rgba(0,255,161,0.5)] transition-all">LAN</span> {lang}
            </button>
         </div>
-      </div>
-
-      {/* --- RIGHT DOCK (STATUS BADGE) --- */}
-      <div className="fixed top-6 right-4 md:right-8 z-50 animate-reveal" style={{animationDelay: '0.4s'}}>
-         <div className="h-14 rounded-2xl px-5 flex items-center gap-3 border border-spring-neon bg-spring-neon shadow-[0_0_20px_rgba(0,255,161,0.4)]">
-             <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-30"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
-             </span>
-             <span className="text-[10px] md:text-[11px] font-mono text-black tracking-[0.15em] uppercase font-bold leading-none">
-                {text.hero.spots}
-             </span>
-         </div>
       </div>
 
       {/* --- CONTENT --- */}

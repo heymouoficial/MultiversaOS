@@ -15,7 +15,16 @@
     "react-markdown": "9",
     "remark-gfm": "4",
     "@supabase/supabase-js": "2",
-    "@tanstack/react-query": "5"
+    "@tanstack/react-query": "5",
+    "framer-motion": "11.0.8",
+    "clsx": "latest",
+    "tailwind-merge": "latest",
+    "lucide-react": "latest",
+    "@radix-ui/react-slot": "latest",
+    "class-variance-authority": "latest",
+    "@radix-ui/react-select": "latest",
+    "ogl": "latest",
+    "three": "latest"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
